@@ -1,0 +1,18 @@
+var TRANSPORT =
+{
+	REWIND : 91,
+	FASTFORWARD : 92,
+	PAUSE : 93,
+	PLAY : 94,
+	RECORD : 95,
+	PREV_MARKER: 46,
+	NEXT_MARKER: 47,
+    // MARKER : 84,
+	// NUDGE :85,
+	// CYCLE : 86,
+	// DROP : 87,
+	// REPLACE : 88,
+	// CLICK : 89,
+	// SOLO : 90,
+	// WHEEL : 60
+};
