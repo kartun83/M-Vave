@@ -6,7 +6,7 @@ load("smk37_keys.js");
 load("smk37_keybindings.js");
 load("smk37_lcd.js");
 load("smk37_observers.js");
-load("blink_manager.js")
+load("blink_manager.js");
 
 // Remove this if you want to be able to use deprecated methods without causing script to stop.
 // This is useful during development.
@@ -50,6 +50,7 @@ let transport;
 // Initialize the controller
 function init() {
    printDebugInfo('Starting init');
+   println("Help path: " + host.getHelpFilePath());
    // Create debug controls for GUI
    //createDebugControls();
    application = host.createApplication();

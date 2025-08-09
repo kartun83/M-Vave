@@ -1,0 +1,220 @@
+#page-container {
+    width: 100%;
+    margin: 0;
+}
+
+#header {
+    height: 43px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    background: #000000;
+}
+
+#footer {
+    clear: both;
+    height: 30px;
+    margin-top: 30px;
+    padding-top: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-top: 1px solid #000000;
+    font: 10px "Lucida Grande", Lucida, Verdana, sans-serif;
+    color: #505050;
+}
+
+#footer a {
+    color: #505050;
+    text-decoration: none;
+}
+
+#illustration {
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+#introduction {
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+#illustration-text {
+    width: 200px;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    padding-left: 25px;
+    float: right;
+    background-image: url("../img/important.png");
+    background-repeat: no-repeat;
+    background-position: left 0 top 3px;
+}
+
+#sticker {
+    width: 400px;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    padding-left: 25px;
+    float: right;
+}
+
+#legend {
+    clear: both;
+    padding-top: 30px;
+    margin: 0 20px 30px 20px;
+    margin-top: 0px;
+    border-top: 1px solid #000000;
+}
+
+#legend h2{
+    font-weight: bold;
+    font-size: 12px;
+    text-decoration: underline;
+    margin: 20px 0 10px 0;
+}
+
+#legend h3{
+    font-weight: bold;
+    font-size: 12px;
+    margin: 10px 0 0 0;
+}
+
+#legend p{
+    margin: 0 0 10px 0;
+}
+
+#logo {
+    width: 170px;
+    height: 20px;
+    background-image: url("../img/logo.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    float: left;
+    margin-top: 12px;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+#title {
+    display: inline-block;
+    float: left;
+    margin-top: 7px;
+    margin-left: 20px;
+    vertical-align: text-bottom;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+	background-color: white;
+	color: black;
+	font: 12px "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font: 26px Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+a {
+    color: #ee7700;
+}
+
+ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+}
+
+li {
+    /*position: relative;*/
+    margin-left: 15px;
+    margin-bottom: 10px;
+    padding-left: 0px;
+}
+
+li span {
+    /*position: absolute;*/
+    left: -5px;
+}
+
+
+table.legend-column {
+	border-width: 0px;
+    border: none;
+	border-collapse: collapse;
+    text-align: left;
+    vertical-align: top;
+    background-color: #ffffff;
+    border-color: #000000;
+    margin-bottom: 15px;
+}
+table.legend-column th {
+    border-bottom:1px dotted;
+    height: 15px;
+    font-weight: bold;
+    padding: 2px 0px 2px 0px;
+    vertical-align: top;
+}
+table.legend-column td {
+    border-bottom:1px dotted;
+    padding: 2px 0px 2px 0px;
+    vertical-align: top;
+}
+
+.first-column-table-row
+{
+    float: left;
+}
+
+.legend-section
+{
+    float: left;
+}
+
+.legend-column
+{
+    width : 240px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    vertical-align: top;
+}
+
+.legend-column p {
+    margin: 5px 0 10px 0;
+}
+
+.legend-column-header
+{
+    width : 100%;
+    height: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+.legend-control-column
+{
+    width : 90px;
+    font-weight: bold;
+}
+
+.legend-explanation-column
+{
+    width : 150px;
+}
+
+.hidden {
+    display: none;
+}
