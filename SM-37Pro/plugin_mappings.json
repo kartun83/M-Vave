@@ -1,0 +1,36 @@
+{
+  "Vital": {
+    "knobs": [
+      { "name": "Cutoff", "id": 0 },
+      { "name": "Resonance", "id": 1 },
+      { "name": "Env Amount", "id": 2 },
+      { "name": "LFO Rate", "id": 3 },
+      { "name": "Drive", "id": 4 },
+      { "name": "Filter Mix", "id": 5 },
+      { "name": "Filter Type", "id": 6 },
+      { "name": "Other Param", "id": 7 }
+    ],
+    "faders": [
+      { "name": "Master Volume", "id": 0 },
+      { "name": "Filter Cutoff", "id": 1 },
+      { "name": "Filter Resonance", "id": 2 },
+      { "name": "Reverb Mix", "id": 3 }
+    ],
+    "presetNext": 90,
+    "presetPrev": 91
+  },
+  "Serum": {
+    "knobs": [
+      { "name": "Filter Cutoff", "id": 0 },
+      { "name": "Filter Resonance", "id": 1 },
+      { "name": "Env Amt", "id": 2 },
+      { "name": "LFO Rate", "id": 3 },
+      { "name": "LFO Amt", "id": 4 },
+      { "name": "Osc A Level", "id": 5 },
+      { "name": "Osc B Level", "id": 6 },
+      { "name": "FX Mix", "id": 7 }
+    ],
+    "presetNext": 100,
+    "presetPrev": 101
+  }
+}

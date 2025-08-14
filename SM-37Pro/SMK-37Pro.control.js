@@ -1,18 +1,21 @@
 loadAPI(24);
 
 load("config.js");
+load("debug.js");
+load("smk37_hostsetup.js");
+load("statusPanel.js");
 load("smk37_pads.js");
 load("smk37_keys.js");
 load("smk37_keybindings.js");
 load("smk37_lcd.js");
 load("smk37_observers.js");
-load("blink_manager.js");
+load("blink_manager.js")
 
 // Remove this if you want to be able to use deprecated methods without causing script to stop.
 // This is useful during development.
 host.setShouldFailOnDeprecatedUse(true);
 
-host.defineController("M-Vave", "SMK-37Pro", "0.1", "cc250360-a340-4e07-b3d8-39af6708613c", "Kartun");
+host.defineController("M-Vave", "SMK-37Pro", "0.2", "cc250360-a340-4e07-b3d8-39af6708613c", "Kartun");
 
 host.defineMidiPorts(2, 1);
 
@@ -43,21 +46,25 @@ switch (platformString) {
 }
 
 // Global variables
+let hostObjects = {};
 let noteInput;
 let padInput;
 let transport;
 
 // Initialize the controller
-function init() {
+function init() {  
    printDebugInfo('Starting init');
-   println("Help path: " + host.getHelpFilePath());
+   //println("Help path: " + getHelpFilePath());
    // Create debug controls for GUI
    //createDebugControls();
-   application = host.createApplication();
+   // application = host.createApplication();
    // cursorDevice = host.createCursorDevice();
 	// cursorTrack = host.createCursorTrackDevice();
     // Create popup browser for devices, show 8 results, with preview
-    var browser = host.createPopupBrowser();
+    //var browser = host.createPopupBrowser();
+
+    hostObjects = setupHostObjects(host);
+    const statusPanel = createStatusPanel(host);
 
    // 1. Get the cursor track and device (Tracking VST)
    const cursorTrack = host.createCursorTrack(0, 0);
@@ -83,8 +90,16 @@ function init() {
 
    transport = host.createTransport();
    // Set up transport observers
-   setupTransportObservers();
-   setupPluginsObservers(cursorTrack, cursorDevice);
+   // setupTransportObservers();
+   // setupPluginsObservers(cursorTrack, cursorDevice);
+   
+   notificationSettings = host.getNotificationSettings();
+   host.scheduleTask(function () {
+	var unisEnabled = notificationSettings.getUserNotificationsEnabled();
+	unisEnabled.set(false);
+   }, 100);
+
+    // debugPage = createDebugPage(host);
 
    // Show initial status
    // clearLCD();

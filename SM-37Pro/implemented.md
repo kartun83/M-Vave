@@ -1,5 +1,13 @@
 # Implemented
 
+# Important keybinding changes
+This setup tries to stick as close as possible to default mapping, but
+for simplicity of code and convenience some changes have to be applied to default mapping.
+
+* Pad 24 (on bank 2) must me remapped to MCP with code 71. As M-Vave didn't care to 
+add separate **SHIFT button** this pad is used as **SHIFT**
+* Knobs on bank 2 (9-16) have to be mapped on channel 6 (like those on bank 1) and type "**CC**"
+
 ## Pad BANK 2
 Pads are turned off when inactive, turns on when active
 

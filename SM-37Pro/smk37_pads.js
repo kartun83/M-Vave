@@ -7,10 +7,10 @@ function onMidiPortPadMessage(status, data1, data2) {
     if (data2 > 0){
         // Cancel blinking if not in paused state
         if (!transportInfo.isPaused) {
-            blinkManager.stopBlinking(TRANSPORT.PAUSE);
+            blinkManager.stopBlinking(PADS.PAUSE);
         }
         switch (data1) {
-            case TRANSPORT.PLAY: // Play
+            case PADS.PLAY: // Play
                 // isPlaying = transport.isPlaying();
                 // println('Playing:', isPlaying);
                 // sendNoteOn(0, TRANSPORT.PLAY, isPlaying ? 127 : 0);
@@ -19,7 +19,7 @@ function onMidiPortPadMessage(status, data1, data2) {
                 // transportInfo.isPaused = !transportInfo.isPlaying;
 
                 break;
-            case TRANSPORT.PAUSE: // Pause
+            case PADS.PAUSE: // Pause
                 // transport.stop();
                 // pos = transport.getPosition().get();
                 // println('Position:' + pos);
@@ -27,15 +27,15 @@ function onMidiPortPadMessage(status, data1, data2) {
                 transportInfo.isPaused = !transportInfo.isPaused;
                 if (transportInfo.isPaused){
                     // startBlinking(TRANSPORT.PAUSE, CONFIG.BLINK_INTERVAL);
-                    blinkManager.startBlinking(TRANSPORT.PAUSE, CONFIG.BLINK_INTERVAL);
+                    blinkManager.startBlinking(PADS.PAUSE, CONFIG.BLINK_INTERVAL);
                 }
                 else{
                     // stopBlinking(TRANSPORT.PAUSE);
-                    blinkManager.stopBlinking(TRANSPORT.PAUSE);
+                    blinkManager.stopBlinking(PADS.PAUSE);
                 }
                 transport.continuePlayback();
                 break;
-            case TRANSPORT.RECORD: // Record
+            case PADS.RECORD: // Record
                 // isRecording = transport.isArrangerRecordEnabled().get();
                 // f(0, TRANSPORT.RECORD, on ? 127 : 0);
                 if (!transportInfo.isRecording)
@@ -50,18 +50,28 @@ function onMidiPortPadMessage(status, data1, data2) {
                     transport.stop();
                 }
                 break;
-            case TRANSPORT.REWIND: // Back (rewind)
+            case PADS.REWIND: // Back (rewind)
                 transport.rewind();
                 break;
-            case TRANSPORT.FASTFORWARD: // Forward (fast-forward)
+            case PADS.FASTFORWARD: // Forward (fast-forward)
                 transport.fastForward();
                 break;
-            case TRANSPORT.PREV_MARKER: // Previous (clip/marker)
+            case PADS.PREV_MARKER: // Previous (clip/marker)
                 transport.jumpToPreviousCueMarker();
                 break;
-            case TRANSPORT.NEXT_MARKER: // Next (clip/marker)
+            case PADS.NEXT_MARKER: // Next (clip/marker)
                 transport.jumpToNextCueMarker();
                 break;
+            case PADS.UNDO:
+                if (hostObjects.application.canUndo()) {
+                    //printDebugInfo("trying to sysex");
+                    //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 00 7C 5F 07 F7");
+                    printDebugInfo('Doing undo');
+                    hostObjects.application.undo();
+                }
+                else{
+                    host.showPopupNotification('Nothing to undo');
+                }
             }    
             printDebugInfo("Pad MIDI Message processed"); 
         }

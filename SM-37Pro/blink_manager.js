@@ -14,7 +14,7 @@ function BlinkManager() {
         // Mark as active and set initial state
         this.activeBlinking[key] = true;
         this.blinkStates[key] = true;
-        sendNoteOn(channel, noteNumber, 127);
+        sendNoteOn(channel, noteNumber, led_state.on);
         
         var self = this;
         
@@ -26,7 +26,7 @@ function BlinkManager() {
             
             // Toggle state and send MIDI
             self.blinkStates[key] = !self.blinkStates[key];
-            sendNoteOn(channel, noteNumber, self.blinkStates[key] ? 127 : 0);
+            sendNoteOn(channel, noteNumber, self.blinkStates[key] ? led_state.on : led_state.off);
             
             // Schedule next blink (one-shot, so we manually reschedule)
             host.scheduleTask(blinkCallback, intervalMs);
@@ -47,7 +47,7 @@ function BlinkManager() {
             delete this.activeBlinking[key];
             delete this.blinkStates[key];
             // Ensure LED is off
-            sendNoteOn(channel, noteNumber, 0);
+            sendNoteOn(channel, noteNumber, led_state.off);
         } else {
             println(`BlinkTask for ${key} not found or already stopped`);
         }

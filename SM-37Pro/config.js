@@ -10,8 +10,24 @@ const CONFIG = {
     BLINK_INTERVAL: 250,
 };
 
+const led_state = {
+    off: 0,
+    on: 127,
+}
+
+
+const MESSAGE_TYPES = {
+    0x80: "Note Off",
+    0x90: "Note On",
+    0xA0: "Poly Pressure",
+    0xB0: "CC",
+    0xC0: "Program Change",
+    0xD0: "Channel Pressure",
+    0xE0: "Pitch Bend"
+};
+
 // Debug controls for GUI
-let debugControls = null;
+// let debugControls = null;
 
 // Simple console debug toggle function
 function toggleDebug() {
@@ -24,107 +40,96 @@ function toggleMidiLogging() {
     println("MIDI logging: " + (CONFIG.LOG_MIDI_MESSAGES ? "ON" : "OFF"));
 }
 
-function createDebugControls() {
-    if (debugControls) return debugControls;
-    
-    try {
-        // Create user controls for debug settings
-        debugControls = host.createUserControls(5);
-        
-        // Debug toggle
-        const debugToggle = debugControls.getControl(0);
-        debugToggle.setLabel("Debug Mode");
-        debugToggle.setValueRange(0, 1, 1); // 0 or 1, step 1
-        
-        // MIDI Message Logging
-        const midiLogging = debugControls.getControl(1);
-        midiLogging.setLabel("Log MIDI Messages");
-        midiLogging.setValueRange(0, 1, 1);
-        
-        // Show Status
-        const showStatus = debugControls.getControl(2);
-        showStatus.setLabel("Show Status");
-        showStatus.setValueRange(0, 1, 1);
-        
-        // MIDI Channel Pads
-        const midiChannelPads = debugControls.getControl(3);
-        midiChannelPads.setLabel("MIDI Channel Pads");
-        midiChannelPads.setValueRange(1, 16, 1);
-        
-        // MIDI Channel Keys
-        const midiChannelKeys = debugControls.getControl(4);
-        midiChannelKeys.setLabel("MIDI Channel Keys");
-        midiChannelKeys.setValueRange(1, 16, 1);
-        
-        // Set up value change callbacks
-        debugToggle.addValueObserver(function(value) {
-            CONFIG.DEBUG = (value === 1);
-            if (CONFIG.DEBUG) {
-                println("Debug mode enabled");
-            } else {
-                println("Debug mode disabled");
-            }
-        });
-        
-        midiLogging.addValueObserver(function(value) {
-            CONFIG.LOG_MIDI_MESSAGES = (value === 1);
-            if (CONFIG.DEBUG) {
-                println("MIDI message logging: " + (CONFIG.LOG_MIDI_MESSAGES ? "enabled" : "disabled"));
-            }
-        });
-        
-        showStatus.addValueObserver(function(value) {
-            CONFIG.SHOW_STATUS = (value === 1);
-            if (CONFIG.DEBUG) {
-                println("Status display: " + (CONFIG.SHOW_STATUS ? "enabled" : "disabled"));
-            }
-        });
-        
-        midiChannelPads.addValueObserver(function(value) {
-            CONFIG.MIDI_CHANNEL_PADS = Math.floor(value);
-            if (CONFIG.DEBUG) {
-                println("MIDI Channel Pads changed to: " + CONFIG.MIDI_CHANNEL_PADS);
-            }
-        });
-        
-        midiChannelKeys.addValueObserver(function(value) {
-            CONFIG.MIDI_CHANNEL_KEYS = Math.floor(value);
-            if (CONFIG.DEBUG) {
-                println("MIDI Channel Keys changed to: " + CONFIG.MIDI_CHANNEL_KEYS);
-            }
-        });
-        
-        println("Debug controls created successfully");
-        
-    } catch (error) {
-        println("Error creating debug controls: " + error.message);
-        println("Using console-only debug mode. Call toggleDebug() to switch debug on/off");
-        // Fallback to console-only debug
-        CONFIG.DEBUG = true;
-    }
-    
-    return debugControls;
-}
+// function createDebugControls() {
+//     if (debugControls) return debugControls;
+//
+//     try {
+//         // Create user controls for debug settings
+//         debugControls = host.createUserControls(5);
+//
+//         // Debug toggle
+//         const debugToggle = debugControls.getControl(0);
+//         debugToggle.setLabel("Debug Mode");
+//         debugToggle.setValueRange(0, 1, 1); // 0 or 1, step 1
+//
+//         // MIDI Message Logging
+//         const midiLogging = debugControls.getControl(1);
+//         midiLogging.setLabel("Log MIDI Messages");
+//         midiLogging.setValueRange(0, 1, 1);
+//
+//         // Show Status
+//         const showStatus = debugControls.getControl(2);
+//         showStatus.setLabel("Show Status");
+//         showStatus.setValueRange(0, 1, 1);
+//
+//         // MIDI Channel Pads
+//         const midiChannelPads = debugControls.getControl(3);
+//         midiChannelPads.setLabel("MIDI Channel Pads");
+//         midiChannelPads.setValueRange(1, 16, 1);
+//
+//         // MIDI Channel Keys
+//         const midiChannelKeys = debugControls.getControl(4);
+//         midiChannelKeys.setLabel("MIDI Channel Keys");
+//         midiChannelKeys.setValueRange(1, 16, 1);
+//
+//         // Set up value change callbacks
+//         debugToggle.addValueObserver(function(value) {
+//             CONFIG.DEBUG = (value === 1);
+//             if (CONFIG.DEBUG) {
+//                 println("Debug mode enabled");
+//             } else {
+//                 println("Debug mode disabled");
+//             }
+//         });
+//
+//         midiLogging.addValueObserver(function(value) {
+//             CONFIG.LOG_MIDI_MESSAGES = (value === 1);
+//             if (CONFIG.DEBUG) {
+//                 println("MIDI message logging: " + (CONFIG.LOG_MIDI_MESSAGES ? "enabled" : "disabled"));
+//             }
+//         });
+//
+//         showStatus.addValueObserver(function(value) {
+//             CONFIG.SHOW_STATUS = (value === 1);
+//             if (CONFIG.DEBUG) {
+//                 println("Status display: " + (CONFIG.SHOW_STATUS ? "enabled" : "disabled"));
+//             }
+//         });
+//
+//         midiChannelPads.addValueObserver(function(value) {
+//             CONFIG.MIDI_CHANNEL_PADS = Math.floor(value);
+//             if (CONFIG.DEBUG) {
+//                 println("MIDI Channel Pads changed to: " + CONFIG.MIDI_CHANNEL_PADS);
+//             }
+//         });
+//
+//         midiChannelKeys.addValueObserver(function(value) {
+//             CONFIG.MIDI_CHANNEL_KEYS = Math.floor(value);
+//             if (CONFIG.DEBUG) {
+//                 println("MIDI Channel Keys changed to: " + CONFIG.MIDI_CHANNEL_KEYS);
+//             }
+//         });
+//
+//         println("Debug controls created successfully");
+//
+//     } catch (error) {
+//         println("Error creating debug controls: " + error.message);
+//         println("Using console-only debug mode. Call toggleDebug() to switch debug on/off");
+//         // Fallback to console-only debug
+//         CONFIG.DEBUG = true;
+//     }
+//
+//     return debugControls;
+// }
 
 // Helper function to log MIDI messages
 function logMidiMessage(port, status, data1, data2) {
     if (!CONFIG.LOG_MIDI_MESSAGES) return;
-    
+
     const channel = (status & 0x0F) + 1;
     const messageType = status & 0xF0;
-    let messageTypeStr = "";
-    
-    switch (messageType) {
-        case 0x80: messageTypeStr = "Note Off"; break;
-        case 0x90: messageTypeStr = "Note On"; break;
-        case 0xA0: messageTypeStr = "Poly Pressure"; break;
-        case 0xB0: messageTypeStr = "CC"; break;
-        case 0xC0: messageTypeStr = "Program Change"; break;
-        case 0xD0: messageTypeStr = "Channel Pressure"; break;
-        case 0xE0: messageTypeStr = "Pitch Bend"; break;
-        default: messageTypeStr = "Unknown"; break;
-    }
-    
+    const messageTypeStr = MESSAGE_TYPES[messageType] || "Unknown";
+
     println(`[MIDI ${port}] Ch:${channel} ${messageTypeStr} Data1:${data1} Data2:${data2}`);
 }
 
@@ -138,7 +143,7 @@ function showStatus() {
     println("Status Display: " + (CONFIG.SHOW_STATUS ? "ON" : "OFF"));
     println("MIDI Channel Pads: " + CONFIG.MIDI_CHANNEL_PADS);
     println("MIDI Channel Keys: " + CONFIG.MIDI_CHANNEL_KEYS);
-    println("CC Range: " + CONFIG.CC_RANGE_LO + " - " + CONFIG.CC_RANGE_HI);
+    // println("CC Range: " + CONFIG.CC_RANGE_LO + " - " + CONFIG.CC_RANGE_HI);
     println("Platform: " + host.getPlatformType().toString());
     println("API Version: " + host.getHostApiVersion());
     println("Product: " + host.getHostProduct() + " " + host.getHostVersion());
