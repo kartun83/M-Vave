@@ -5,30 +5,66 @@ var transportInfo = {
     isRecording: false,
     isPlaying: false,
     isPaused: false,
+    isMetronomeEnabled: false,
+    metronome_ticks: false,
+    isPrerollEnabled: false,
     playbackPosition: 0.0
 }
 // let playbackPosition;
 function setupTransportObservers() {
    // Observer for recording state changes
    transport.isArrangerRecordEnabled().addValueObserver(function(on){
-      transportInfo.isRecording = on; 
-      sendNoteOn(0, PADS.RECORD, on ? 127 : 0);
+      transportInfo.isRecording = on;
+      // println('Enabling record pad !!!!!');
+      sendNoteOn(0, PADS.RECORD, on ? led_state.on : led_state.off);
    });
    
    // Observer for play/pause state changes
    transport.isPlaying().addValueObserver(function(on){
-      transportInfo.isPlaying = on; 
-      sendNoteOn(0, PADS.PLAY, on ? 127 : 0);
+      transportInfo.isPlaying = on;
+       println('Enabling playing pad');
+      sendNoteOn(0, PADS.PLAY, on ? led_state.on : led_state.off);
     //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
    });
 
    // Observer for play/pause state changes
-   transport.getPosition().addValueObserver(function(on){
-      transportInfo.playbackPosition = on; 
+   transport.getPosition().addValueObserver(function(position){
+      transportInfo.playbackPosition = position;
     //   println('Playback pos:' + transportInfo.playbackPosition);
     // sendNoteOn(0, TRANSPORT.PLAY, on ? 127 : 0);
   //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
  });
+
+
+
+    transport.isMetronomeEnabled().addValueObserver(function(on){
+        transportInfo.isMetronomeEnabled = on;
+        //   println('Playback pos:' + transportInfo.playbackPosition);
+        // sendNoteOn(0, TRANSPORT.PLAY, on ? 127 : 0);
+        //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
+    });
+
+    transport.isMetronomeTickPlaybackEnabled().addValueObserver(function(on){
+        transportInfo.isMetronomeEnabled = on;
+        //   println('Playback pos:' + transportInfo.playbackPosition);
+        // sendNoteOn(0, TRANSPORT.PLAY, on ? 127 : 0);
+        //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
+    });
+
+    transport.preRoll().addValueObserver(function(on){
+        transportInfo.isPrerollEnabled = on;
+        //   println('Playback pos:' + transportInfo.playbackPosition);
+        // sendNoteOn(0, TRANSPORT.PLAY, on ? 127 : 0);
+        //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
+    });
+
+    // transport.isMetronomeAudibleDuringPreRoll().addValueObserver(function(on){
+    //     transportInfo.playbackPosition = on;
+    //     //   println('Playback pos:' + transportInfo.playbackPosition);
+    //     // sendNoteOn(0, TRANSPORT.PLAY, on ? 127 : 0);
+    //     //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
+    // });
+
 }
 
 

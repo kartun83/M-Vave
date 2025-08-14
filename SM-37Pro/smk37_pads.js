@@ -42,6 +42,7 @@ function onMidiPortPadMessage(status, data1, data2) {
                 {                    
                     printDebugInfo('Starting recording');
                     transport.record();
+                    // sendNoteOn(0, PADS.RECORD, led_state.on);
                     // transportInfo.isPaused = !transportInfo.isPlaying;
                 }
                 else
@@ -64,8 +65,15 @@ function onMidiPortPadMessage(status, data1, data2) {
                 break;
             case PADS.UNDO:
                 if (hostObjects.application.canUndo()) {
-                    //printDebugInfo("trying to sysex");
+                    printDebugInfo("trying to sysex");
                     //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 00 7C 5F 07 F7");
+                    //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 7E 03 58 07 F7");
+                    // const SYSEX_HDR = "f0 00 00 66 14";
+                    // for ( var i = 0; i < 8; i++)
+                    // {
+                    //     //sendChannelPressure(0, 0 + (i << 4)); // resets the leds (and vu-meters on the display?)
+                    //     sendSysex(SYSEX_HDR + "20 0" + i + "01 f7");
+                    // }
                     printDebugInfo('Doing undo');
                     hostObjects.application.undo();
                 }

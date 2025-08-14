@@ -9,7 +9,11 @@ function onMidiPortKeysMessage(status, data1, data2) {
     logMidiMessage("Keys", status, data1, data2);
 
     switch (channel) {
-        case FADERS.CHANNEL: onMidiPortFaderMessage(status, data1, data2); break;
+        case FADERS.CHANNEL:
+            if (data1 >= FADERS.LOW && data1 <= FADERS.HIGH) {
+                onMidiPortFaderMessage(status, data1, data2);
+                break;
+            };
         case WHEELS.PITCH.CHANNEL: // fall through
         case WHEELS.MOD.CHANNEL: onMidiPortWheelMessage(status, data1, data2); break;
         case KNOBS.BANK_1.CHANNEL: onMidiPortKnobMessage(status, data1, data2); break;

@@ -19,17 +19,18 @@ const SHIFT = {
 
 const FADERS = {
     BANK_1: {
-        CHANNEL: 1,
+        // CHANNEL: 1,
         FADER_LOW: 64,
         FADER_HIGH: 67,
     },
     BANK_2: {
-        CHANNEL: 1,
+        // CHANNEL: 1,
         FADER_LOW: 68,
         FADER_HIGH: 71,
     },
-    // Dirty ((
+    // // Dirty ((
     TYPE: 0xB0, // CC
+    CHANNEL: 1,
     LOW: 64,
     HIGH: 71
 }

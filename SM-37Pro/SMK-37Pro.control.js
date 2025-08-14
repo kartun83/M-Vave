@@ -90,8 +90,8 @@ function init() {
 
    transport = host.createTransport();
    // Set up transport observers
-   // setupTransportObservers();
-   // setupPluginsObservers(cursorTrack, cursorDevice);
+   setupTransportObservers();
+   setupPluginsObservers(cursorTrack, cursorDevice);
    
    notificationSettings = host.getNotificationSettings();
    host.scheduleTask(function () {
