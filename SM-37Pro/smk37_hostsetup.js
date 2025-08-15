@@ -8,13 +8,18 @@ function setupHostObjects(host) {
     const transport = host.createTransport();
     const notificationSettings = host.getNotificationSettings();
 
+    const document = host.getDocumentState();
+    const preferences = host.getPreferences();
+
     return {
         application,
         browser,
         cursorTrack,
         cursorDevice,
         transport,
-        notificationSettings
+        notificationSettings,
+        document,
+        preferences
     };
 }
 

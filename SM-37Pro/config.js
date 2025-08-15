@@ -1,3 +1,15 @@
+const PLUGIN_SETTINGS = {
+    VERSION: '0.3',
+    VENDOR: 'M-Vave',
+    BOARD: 'SMK-37Pro',
+    AUTHOR: 'kartun83',
+    UUID: 'cc250360-a340-4e07-b3d8-39af6708613c',
+    BOARD_SETTINGS: {
+        INS: 2,
+        OUTS: 1
+    }
+}
+
 // Shared configuration for SMK-37Pro controller scripts
 const CONFIG = {
     DEBUG: true,
@@ -14,6 +26,12 @@ const led_state = {
     off: 0,
     on: 127,
 }
+
+const MODES = {
+    REC: "8 Track Rec",
+    ARRANGE: "Arrangement",
+    PERFORM: "Perform",
+};
 
 
 const MESSAGE_TYPES = {

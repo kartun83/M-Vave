@@ -2,6 +2,7 @@ loadAPI(24);
 
 load("config.js");
 load("debug.js");
+load("bitwig_ui.js");
 load("smk37_hostsetup.js");
 load("statusPanel.js");
 load("smk37_pads.js");
@@ -15,9 +16,13 @@ load("blink_manager.js")
 // This is useful during development.
 host.setShouldFailOnDeprecatedUse(true);
 
-host.defineController("M-Vave", "SMK-37Pro", "0.2", "cc250360-a340-4e07-b3d8-39af6708613c", "Kartun");
+host.defineController(PLUGIN_SETTINGS.VENDOR,
+                      PLUGIN_SETTINGS.BOARD,
+                      PLUGIN_SETTINGS.VERSION,
+                      PLUGIN_SETTINGS.UUID,
+                      PLUGIN_SETTINGS.AUTHOR);
 
-host.defineMidiPorts(2, 1);
+host.defineMidiPorts(PLUGIN_SETTINGS.BOARD_SETTINGS.INS, PLUGIN_SETTINGS.BOARD_SETTINGS.OUTS);
 
 // Define the range of our CCs (now from config)
 // const CC_RANGE_HI = CONFIG.CC_RANGE_HI;
@@ -65,6 +70,8 @@ function init() {
 
     hostObjects = setupHostObjects(host);
     const statusPanel = createStatusPanel(host);
+
+    setup_ui(hostObjects.document, hostObjects.preferences);
 
    // 1. Get the cursor track and device (Tracking VST)
    const cursorTrack = host.createCursorTrack(0, 0);
