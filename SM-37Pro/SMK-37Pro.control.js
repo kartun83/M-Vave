@@ -1,7 +1,7 @@
 loadAPI(24);
 
 load("config.js");
-load("debug.js");
+// load("debug.js");
 load("bitwig_ui.js");
 load("smk37_hostsetup.js");
 load("statusPanel.js");
@@ -21,6 +21,7 @@ host.defineController(PLUGIN_SETTINGS.VENDOR,
                       PLUGIN_SETTINGS.VERSION,
                       PLUGIN_SETTINGS.UUID,
                       PLUGIN_SETTINGS.AUTHOR);
+host.setErrorReportingEMail(PLUGIN_SETTINGS.SUPPORT);
 
 host.defineMidiPorts(PLUGIN_SETTINGS.BOARD_SETTINGS.INS, PLUGIN_SETTINGS.BOARD_SETTINGS.OUTS);
 
@@ -30,20 +31,20 @@ host.defineMidiPorts(PLUGIN_SETTINGS.BOARD_SETTINGS.INS, PLUGIN_SETTINGS.BOARD_S
 
 const platformString = host.getPlatformType().toString();
 
-var blinkManager = new BlinkManager();
+let blinkManager = new BlinkManager();
 
 // println(`platform string: "${platformString}"`);
 
 // Use the PlatformType enum directly
 switch (platformString) {
    case "WINDOWS":
-      println("Windows platform detected");
+       printDebugInfo("Windows platform detected");
       break;
    case "MAC":
-      println("Mac platform detected");
+       printDebugInfo("Mac platform detected");
       break;
    case "LINUX":
-      println("Linux platform detected");
+       printDebugInfo("Linux platform detected");
       break;
    default:
       println(`!!Unknown platform detected: "${platformString}"`);
@@ -53,8 +54,13 @@ switch (platformString) {
 // Global variables
 let hostObjects = {};
 let noteInput;
-let padInput;
-let transport;
+let globalState = {
+    isShiftPressed: false,
+}
+// let padInput;
+// let transport;
+
+//let shiftHeld = host.createSettableBooleanValue("Shift Held", "General");
 
 // Initialize the controller
 function init() {  
@@ -71,18 +77,33 @@ function init() {
     hostObjects = setupHostObjects(host);
     const statusPanel = createStatusPanel(host);
 
+    // shiftButton = surface.createNoteOnButton(71, 9); // channel 10 → index 9
+    // shiftButton.setLabel("Shift");
+
+
+
+// let     shift_matcher = host.getMidiInPort(1).createActionMatcher(host.midiExpressions().createIsCCValueExpression(1, 71, 127));
+//     println(`Shift state: ${shift_matcher}`);
+
+    // // You can "observe" it
+    // globalState.isShiftPressed.addValueObserver(state => {
+    //     println("Shift pressed state changed: " + state);
+    // });
+
     setup_ui(hostObjects.document, hostObjects.preferences);
 
    // 1. Get the cursor track and device (Tracking VST)
-   const cursorTrack = host.createCursorTrack(0, 0);
-   const cursorDevice = cursorTrack.createCursorDevice();
+   // const cursorTrack = host.createCursorTrack(0, 0);
+   // const cursorDevice = cursorTrack.createCursorDevice();
    
     // Input for keys
    const midiInPort = host.getMidiInPort(0);
    printDebugInfo('Opened Keys MIDI Port');
-   // Imput for PADS
+   // Input for PADS
    const midiInPort2 = host.getMidiInPort(1);
    printDebugInfo('Opened Pads commands MIDI Port');
+
+   setupShiftButton(hostObjects.surface, midiInPort);
    
    // Set up MIDI callback
    midiInPort.setMidiCallback(onMidiPortKeysMessage);
@@ -92,19 +113,20 @@ function init() {
    noteInput = midiInPort.createNoteInput("Notes");
    noteInput.setShouldConsumeEvents(false);
 
-   padsInput = midiInPort.createNoteInput("Pads");
+    let padsInput = midiInPort.createNoteInput("Pads");
    padsInput.setShouldConsumeEvents(false);
 
-   transport = host.createTransport();
+   // transport = host.createTransport();
    // Set up transport observers
-   setupTransportObservers();
-   setupPluginsObservers(cursorTrack, cursorDevice);
-   
-   notificationSettings = host.getNotificationSettings();
-   host.scheduleTask(function () {
-	var unisEnabled = notificationSettings.getUserNotificationsEnabled();
-	unisEnabled.set(false);
-   }, 100);
+   setupTransportObservers(hostObjects.transport);
+   setupPluginsObservers(hostObjects.cursorTrack, hostObjects.cursorDevice);
+   setupApplicationObservers(hostObjects.application);
+
+   //  let notificationSettings = host.getNotificationSettings();
+   // host.scheduleTask(function () {
+   //     const unisEnabled = notificationSettings.getUserNotificationsEnabled();
+   //     unisEnabled.set(false);
+   // }, 100);
 
     // debugPage = createDebugPage(host);
 

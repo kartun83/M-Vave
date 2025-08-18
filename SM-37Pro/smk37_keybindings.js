@@ -58,3 +58,29 @@ const WHEELS = {
         CHANNEL: 4,
     }
 }
+
+
+// // function Shift(host, channel, key) {
+// //     this.channel = channel - 1; // Bitwig channels are 0-based
+// //     this.key = key;
+// //     this.value = host.createBooleanValue();
+// // }
+//
+// Shift.prototype.handleMidi = function(status, data1, data2) {
+//     const type = status & 0xF0;
+//     const channel = status & 0x0F;
+//
+//     if (channel === this.channel && data1 === this.key) {
+//         if (type === 0x90 && data2 > 0) {
+//             this.value.set(true);
+//         } else if (type === 0x80 || (type === 0x90 && data2 === 0)) {
+//             this.value.set(false);
+//         }
+//         return true; // consumed
+//     }
+//     return false;
+// };
+//
+// Shift.prototype.isHeld = function() {
+//     return this.value.get();
+// };

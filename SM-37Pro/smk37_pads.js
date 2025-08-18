@@ -1,8 +1,33 @@
+let shiftButton = null;
+
 function onMidiPortPadMessage(status, data1, data2) {
     // Use the new logging function
-    logMidiMessage("Pads", status, data1, data2);
+    logMidiMessage("Pads", status, data1, data2, `Shift state: ${globalState.isShiftPressed}`);
 
-    // Check button presses (but not releases) in here
+   // println(`ShiftState: ${globalState.isShiftPressed}, ${shiftButton.isPressed().get()}`);
+}
+
+function setupShiftButton(surface, port){
+    // Define a hardware button for Shift (note 71 on channel 10)
+    shiftButton = surface.createHardwareButton("SHIFT"); //createNoteOnButton(71, 9); // channel 10 → index 9
+    shiftButton.isPressed().markInterested();
+    println(`Setup shift button: ${shiftButton.isPressed().get()}`);
+     shiftButton.pressedAction().setActionMatcher(port.createCCActionMatcher(SHIFT.CHANNEL-1, SHIFT.KEY, led_state.on));
+     shiftButton.releasedAction().setActionMatcher(port.createCCActionMatcher(SHIFT.CHANNEL-1, SHIFT.KEY, led_state.off));
+
+    shiftButton.setLabel("Shift");
+    shiftButton.isPressed().addValueObserver(function(){
+        globalState.isShiftPressed = shiftButton.isPressed().getAsBoolean();
+        printDebugInfo(`Shift state: ${globalState.isShiftPressed}`);
+    })
+}
+
+function _pads_8track(status, data1, data2){
+
+}
+
+function _pads_arranger(status, data1, data2){
+// Check button presses (but not releases) in here
     // All pads toggling implemented in observers
     if (data2 > 0){
         // Cancel blinking if not in paused state
@@ -11,10 +36,10 @@ function onMidiPortPadMessage(status, data1, data2) {
         }
         switch (data1) {
             case PADS.PLAY: // Play
-                // isPlaying = transport.isPlaying();
-                // println('Playing:', isPlaying);
-                // sendNoteOn(0, TRANSPORT.PLAY, isPlaying ? 127 : 0);
-		        // sendNoteOn(0, TRANSPORT.STOP, isPlaying ? 0 : 127);
+                            // isPlaying = transport.isPlaying();
+                            // println('Playing:', isPlaying);
+                            // sendNoteOn(0, TRANSPORT.PLAY, isPlaying ? 127 : 0);
+                            // sendNoteOn(0, TRANSPORT.STOP, isPlaying ? 0 : 127);
                 transport.togglePlay();
                 // transportInfo.isPaused = !transportInfo.isPlaying;
 
@@ -39,7 +64,7 @@ function onMidiPortPadMessage(status, data1, data2) {
                 // isRecording = transport.isArrangerRecordEnabled().get();
                 // f(0, TRANSPORT.RECORD, on ? 127 : 0);
                 if (!transportInfo.isRecording)
-                {                    
+                {
                     printDebugInfo('Starting recording');
                     transport.record();
                     // sendNoteOn(0, PADS.RECORD, led_state.on);
@@ -80,15 +105,13 @@ function onMidiPortPadMessage(status, data1, data2) {
                 else{
                     host.showPopupNotification('Nothing to undo');
                 }
-            }    
-            printDebugInfo("Pad MIDI Message processed"); 
         }
+        printDebugInfo("Pad MIDI Message processed");
+    }
     else
     {
         printDebugInfo(`Ignoring keyrelease ${status}, ${data1}`)
-    }              
-
-  
+    }
 }
 
 // Obsolete. Code for CC toggle mode

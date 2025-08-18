@@ -11,6 +11,8 @@ function setupHostObjects(host) {
     const document = host.getDocumentState();
     const preferences = host.getPreferences();
 
+    const surface = host.createHardwareSurface();
+
     return {
         application,
         browser,
@@ -19,7 +21,8 @@ function setupHostObjects(host) {
         transport,
         notificationSettings,
         document,
-        preferences
+        preferences,
+        surface,
     };
 }
 
@@ -36,6 +39,7 @@ function setupMidiPorts(host, onKeys, onOtherControls) {
 
     const noteInputPads = midiInKeys.createNoteInput("Pads");
     noteInputPads.setShouldConsumeEvents(false);
+    // noteInputPads.
 
     // const noteInputKnobs = midiInKeys.createNoteInput("Knobs");
     // noteInputKnobs.setShouldConsumeEvents(false);
