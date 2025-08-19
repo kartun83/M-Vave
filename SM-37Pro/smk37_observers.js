@@ -57,8 +57,8 @@ function setupTransportObservers(transport_obj) {
         //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);
     });
 
-    transport_obj.preRoll().addValueObserver(function(on){
-        transportInfo.isPrerollEnabled = on;
+    transport_obj.preRoll().addValueObserver(function(value){
+        transportInfo.isPrerollEnabled = value;
         //   println('Playback pos:' + transportInfo.playbackPosition);
         // sendNoteOn(0, TRANSPORT.PLAY, on ? 127 : 0);
         //   sendNoteOn(0, TRANSPORT.PAUSE, on ? 0 : 127);

@@ -9,12 +9,23 @@ function _setup_general_settings(preferences){
         CONFIG.DEBUG = newValue;
         host.println(`Debug mode is now ${CONFIG.DEBUG ? "ON" : "OFF"}`);
     });
+
+    const logMidiSetting = preferences.getBooleanSetting("Log midi messages", "General", CONFIG.DEBUG);
+    logMidiSetting.addValueObserver((newValue) => {
+        CONFIG.LOG_MIDI_MESSAGES = newValue;
+        host.println(`Midi logging mode is now ${CONFIG.LOG_MIDI_MESSAGES? "ON" : "OFF"}`);
+    });
 }
 
 function _setUpfloating_window(document){
     const modeSetting = document.getEnumSetting(
         "Controller Mode", "Mode Switching",
         [MODES.REC, MODES.ARRANGE], MODES.REC
+    )
+
+    modeSetting.addValueObserver(newValue => {
+        globalState.modeSetting = newValue;
+        printDebugInfo(`Changed mode to ${globalState.modeSetting}`); }
     );
 
     // uControl = host.createUserControls(16);

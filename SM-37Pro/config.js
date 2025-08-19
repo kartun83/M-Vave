@@ -1,5 +1,5 @@
 const PLUGIN_SETTINGS = {
-    VERSION: '0.3',
+    VERSION: '0.4',
     VENDOR: 'M-Vave',
     BOARD: 'SMK-37Pro',
     AUTHOR: 'kartun83',
@@ -16,13 +16,15 @@ const PLUGIN_SETTINGS = {
 // Shared configuration for SMK-37Pro controller scripts
 const CONFIG = {
     DEBUG: true,
-    CC_RANGE_HI: 95,
-    CC_RANGE_LO: 48,
+    // KNOBS_RANGE_HI: 55,
+    // CC_RANGE_LO: 48,
     MIDI_CHANNEL_PADS: 10,
     MIDI_CHANNEL_KEYS: 1,
     LOG_MIDI_MESSAGES: true,
     // SHOW_STATUS: true,
     BLINK_INTERVAL: 250,
+    SHOW_STATUS: true,
+    numSendPages: 5,
 };
 
 const led_state = {
@@ -62,12 +64,14 @@ function toggleMidiLogging() {
 }
 
 // Helper function to log MIDI messages
-function logMidiMessage(port, status, data1, data2, opt) {
+function logMidiMessage(port, status, data1, data2, opt="") {
     if (!CONFIG.LOG_MIDI_MESSAGES) return;
 
     const channel = (status & 0x0F) + 1;
     const messageType = status & 0xF0;
     const messageTypeStr = MESSAGE_TYPES[messageType] || "Unknown";
+
+    // if (!opt) {opt = "";}
 
     println(`[MIDI ${port}] Ch:${channel} Type:${messageTypeStr}, ${messageType}; Data1:${data1} Data2:${data2} ${opt}`);
 }
@@ -89,9 +93,13 @@ function showStatus() {
     println("===================================");
 }
 
-function printDebugInfo(text){
+function printDebugInfo(text, show_popup = false) {
     if (CONFIG.DEBUG){
         println(text);
+    }
+
+    if (show_popup) {
+        host.showPopupNotification(text);
     }
 }
 

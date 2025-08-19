@@ -3,8 +3,26 @@ let shiftButton = null;
 function onMidiPortPadMessage(status, data1, data2) {
     // Use the new logging function
     logMidiMessage("Pads", status, data1, data2, `Shift state: ${globalState.isShiftPressed}`);
+    // const channel = (status & 0x0F) + 1;
+    const channel = (status & 0x0F) ;
+    // Process only our preset here. user may use other keyboard preset with different mappings,
+    // so try to not interfere with it
+    // if (channel === PADS.CHANNEL) {
+        // const knob = _resolvePad(status & 0x0F, data1);
+        switch (globalState.modeSetting) {
+            case MODES.REC:
+                onMidiPadRecMessage(status, data1, data2);
+                break;
+            case MODES.ARRANGE:
+                onMidiPadArrangeMessage(status, data1, data2);
+                break;
+            default:
+                printDebugInfo(`Unsupported mode for Knobs: ${globalState.modeSetting}`, true);
 
-   // println(`ShiftState: ${globalState.isShiftPressed}, ${shiftButton.isPressed().get()}`);
+        }
+    // } else {
+    //     printDebugInfo(`Received data for PADS in ${channel}, but in config it should be ${PADS.CHANNEL}. Leaving unprocessed`);
+    // }
 }
 
 function setupShiftButton(surface, port){
@@ -22,11 +40,25 @@ function setupShiftButton(surface, port){
     })
 }
 
-function _pads_8track(status, data1, data2){
+function onMidiPadRecMessage(status, data1, data2){
+    if (data1 >= PADS.ARM.LOW && data1 <= PADS.ARM.HIGH){
 
+    }
+    else{
+        _pads_transport(status, data1, data2);
+    }
 }
 
-function _pads_arranger(status, data1, data2){
+function onMidiPadArrangeMessage(status, data1, data2){
+    if (data1 >= PADS.ARM.LOW && data1 <= PADS.ARM.HIGH){
+
+    }
+    else{
+        _pads_transport(status, data1, data2);
+    }
+}
+
+function _pads_transport(status, data1, data2){
 // Check button presses (but not releases) in here
     // All pads toggling implemented in observers
     if (data2 > 0){
@@ -40,7 +72,7 @@ function _pads_arranger(status, data1, data2){
                             // println('Playing:', isPlaying);
                             // sendNoteOn(0, TRANSPORT.PLAY, isPlaying ? 127 : 0);
                             // sendNoteOn(0, TRANSPORT.STOP, isPlaying ? 0 : 127);
-                transport.togglePlay();
+                hostObjects.transport.togglePlay();
                 // transportInfo.isPaused = !transportInfo.isPlaying;
 
                 break;
@@ -58,7 +90,7 @@ function _pads_arranger(status, data1, data2){
                     // stopBlinking(TRANSPORT.PAUSE);
                     blinkManager.stopBlinking(PADS.PAUSE);
                 }
-                transport.continuePlayback();
+                hostObjects.transport.continuePlayback();
                 break;
             case PADS.RECORD: // Record
                 // isRecording = transport.isArrangerRecordEnabled().get();
@@ -66,45 +98,52 @@ function _pads_arranger(status, data1, data2){
                 if (!transportInfo.isRecording)
                 {
                     printDebugInfo('Starting recording');
-                    transport.record();
+                    hostObjects.transport.record();
                     // sendNoteOn(0, PADS.RECORD, led_state.on);
                     // transportInfo.isPaused = !transportInfo.isPlaying;
                 }
                 else
                 {
                     printDebugInfo('Stopping recording');
-                    transport.stop();
+                    hostObjects.transport.stop();
                 }
                 break;
             case PADS.REWIND: // Back (rewind)
-                transport.rewind();
+                hostObjects.transport.rewind();
                 break;
             case PADS.FASTFORWARD: // Forward (fast-forward)
-                transport.fastForward();
+                hostObjects.transport.fastForward();
                 break;
             case PADS.PREV_MARKER: // Previous (clip/marker)
-                transport.jumpToPreviousCueMarker();
+                hostObjects.transport.jumpToPreviousCueMarker();
                 break;
             case PADS.NEXT_MARKER: // Next (clip/marker)
-                transport.jumpToNextCueMarker();
+                hostObjects.transport.jumpToNextCueMarker();
                 break;
             case PADS.UNDO:
-                if (hostObjects.application.canUndo()) {
-                    printDebugInfo("trying to sysex");
-                    //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 00 7C 5F 07 F7");
-                    //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 7E 03 58 07 F7");
-                    // const SYSEX_HDR = "f0 00 00 66 14";
-                    // for ( var i = 0; i < 8; i++)
-                    // {
-                    //     //sendChannelPressure(0, 0 + (i << 4)); // resets the leds (and vu-meters on the display?)
-                    //     sendSysex(SYSEX_HDR + "20 0" + i + "01 f7");
-                    // }
+                if (globalState.isShiftPressed){
+                    printDebugInfo('Doing redo');
+                    hostObjects.application.redo();
+                }else{
                     printDebugInfo('Doing undo');
                     hostObjects.application.undo();
                 }
-                else{
-                    host.showPopupNotification('Nothing to undo');
-                }
+                // if (hostObjects.application.canUndo()) {
+                //     // printDebugInfo("trying to sysex");
+                //     //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 00 7C 5F 07 F7");
+                //     //sendSysex("F0 00 32 09 59 00 00 40 02 4D 5E 04 00 30 00 00 00 00 7E 03 58 07 F7");
+                //     // const SYSEX_HDR = "f0 00 00 66 14";
+                //     // for ( var i = 0; i < 8; i++)
+                //     // {
+                //     //     //sendChannelPressure(0, 0 + (i << 4)); // resets the leds (and vu-meters on the display?)
+                //     //     sendSysex(SYSEX_HDR + "20 0" + i + "01 f7");
+                //     // }
+                //     printDebugInfo('Doing undo');
+                //     hostObjects.application.undo();
+                // }
+                // else{
+                //     host.showPopupNotification('Nothing to undo');
+                // }
         }
         printDebugInfo("Pad MIDI Message processed");
     }

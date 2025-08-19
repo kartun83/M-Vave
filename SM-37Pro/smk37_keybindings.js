@@ -8,7 +8,11 @@ const PADS =
         RECORD: 95,
         PREV_MARKER: 46,
         NEXT_MARKER: 47,
-        UNDO: 76
+        UNDO: 76,
+        ARM:{
+            LOW: 64,
+            HIGH: 70,
+        }
     };
 
 const SHIFT = {
@@ -18,36 +22,20 @@ const SHIFT = {
 }
 
 const FADERS = {
-    BANK_1: {
-        // CHANNEL: 1,
-        FADER_LOW: 64,
-        FADER_HIGH: 67,
-    },
-    BANK_2: {
-        // CHANNEL: 1,
-        FADER_LOW: 68,
-        FADER_HIGH: 71,
-    },
-    // // Dirty ((
     TYPE: 0xB0, // CC
     CHANNEL: 1,
-    LOW: 64,
-    HIGH: 71
+    SIZE: 4,
+    BASE_CC: 64,
+    BANKS: 2,
 }
 
 const KNOBS = {
-    BANK_1 :{
-        CHANNEL: 6,
-        KNOB_LOW: 48,
-        KNOB_HIGH: 55,
-    },
-    BANK_2 :{
-        // By default it's bound to channel 1-8
-        CHANNEL: 6,
-        KNOB_LOW: 56,
-        KNOB_HIGH: 63,
-    }
-}
+    CHANNEL: 6,        // your hardware sends on channel 6
+    SIZE: 8,           // 8 knobs per bank
+    BASE_CC: 48,       // first CC for BANK_1
+    BANKS: 2,           // how many banks total
+    //MASTER_CC: 63,
+};
 
 const WHEELS = {
     PITCH : {

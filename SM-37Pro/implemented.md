@@ -4,8 +4,10 @@
 This setup tries to stick as close as possible to default mapping, but
 for simplicity of code and convenience some changes have to be applied to default mapping.
 
-* Pad 24 (on bank 2) must me remapped to MCP with code 71. As M-Vave didn't care to 
+* Pad 24 (on bank 2) must me remapped to Momentary with code 71. As M-Vave didn't care to 
 add separate **SHIFT button** this pad is used as **SHIFT**
+![shift_mapping.png](img/shift_mapping.png)
+
 * Knobs on bank 2 (9-16) have to be mapped on channel 6 (like those on bank 1) and type "**CC**"
 
 ## Pad BANK 2

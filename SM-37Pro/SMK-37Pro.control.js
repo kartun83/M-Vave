@@ -56,6 +56,7 @@ let hostObjects = {};
 let noteInput;
 let globalState = {
     isShiftPressed: false,
+    modeSetting: null,
 }
 // let padInput;
 // let transport;

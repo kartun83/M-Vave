@@ -8,6 +8,9 @@ function setupHostObjects(host) {
     const transport = host.createTransport();
     const notificationSettings = host.getNotificationSettings();
 
+    const masterTrack = host.createMasterTrack(0);
+    const trackBank = host.createMainTrackBank(8, CONFIG.numSendPages, 99);
+
     const document = host.getDocumentState();
     const preferences = host.getPreferences();
 
@@ -23,6 +26,8 @@ function setupHostObjects(host) {
         document,
         preferences,
         surface,
+        masterTrack,
+        trackBank,
     };
 }
 
