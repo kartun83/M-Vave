@@ -11,6 +11,8 @@ function setupHostObjects(host) {
     const masterTrack = host.createMasterTrack(0);
     const trackBank = host.createMainTrackBank(8, CONFIG.numSendPages, 99);
 
+    _markTrackBankProperties(trackBank);
+
     const document = host.getDocumentState();
     const preferences = host.getPreferences();
 
@@ -59,4 +61,23 @@ function setupMidiPorts(host, onKeys, onOtherControls) {
             midiInPads.bindNoteOn(0, note, callback);
         }
     };
+}
+
+/**
+ * Marks all important track properties as interested for a track bank
+ * @param {TrackBank} trackBank - The Bitwig track bank
+ */
+function _markTrackBankProperties(trackBank) {
+    const numTracks = trackBank.getSizeOfBank();
+    for (let i = 0; i < numTracks; i++) {
+        const track = trackBank.getItemAt(i);
+        // Mark key properties as interested
+        track.arm().markInterested();
+        track.mute().markInterested();
+        track.solo().markInterested();
+        track.volume().markInterested();
+        track.pan().markInterested();
+        track.name().markInterested();
+        track.exists().markInterested(); // useful if bank can scroll
+    }
 }

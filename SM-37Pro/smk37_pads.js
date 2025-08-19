@@ -41,7 +41,19 @@ function setupShiftButton(surface, port){
 }
 
 function onMidiPadRecMessage(status, data1, data2){
-    if (data1 >= PADS.ARM.LOW && data1 <= PADS.ARM.HIGH){
+    if (data1 >= PADS.ARM.LOW && data1 <= PADS.ARM.HIGH && data2 === led_state.on){
+        const track = hostObjects.trackBank.getItemAt(data1 - PADS.ARM.LOW);
+        if (globalState.isShiftPressed) {
+            _cycleTrackState(track);
+        }
+        else{
+            printDebugInfo(`Arming track: ${data1 - PADS.ARM.LOW}`);
+            if (!track) {printDebugInfo('No track selected !!!'); return;}
+            track.arm().toggle();
+            let isArmed = track.arm().getAsBoolean();
+            printDebugInfo(`Arm status ${isArmed}`);
+            sendNoteOn(0, data1, !isArmed ? led_state.on : led_state.off);
+        }
 
     }
     else{
@@ -55,6 +67,23 @@ function onMidiPadArrangeMessage(status, data1, data2){
     }
     else{
         _pads_transport(status, data1, data2);
+    }
+}
+
+function _cycleTrackState(track) {
+    const isSolo = track.solo().get();
+    const isMute = track.mute().get();
+
+    if (!isSolo && !isMute) {
+        track.solo().set(true);      // first press → Solo
+        printDebugInfo(`Set solo`);
+    } else if (isSolo) {
+        track.solo().set(false);
+        track.mute().set(true);      // second press → Mute
+        printDebugInfo(`Set mute`);
+    } else if (isMute) {
+        track.mute().set(false);     // third press → Off
+        printDebugInfo(`Set noting`);
     }
 }
 
@@ -115,10 +144,20 @@ function _pads_transport(status, data1, data2){
                 hostObjects.transport.fastForward();
                 break;
             case PADS.PREV_MARKER: // Previous (clip/marker)
-                hostObjects.transport.jumpToPreviousCueMarker();
+                // if (globalState.isShiftPressed){
+                //     hostObjects.transport.cue
+                // }
+                // else{
+                    hostObjects.transport.jumpToPreviousCueMarker();
+                // }
                 break;
             case PADS.NEXT_MARKER: // Next (clip/marker)
-                hostObjects.transport.jumpToNextCueMarker();
+                if (globalState.isShiftPressed){
+                    hostObjects.transport.addCueMarkerAtPlaybackPosition();
+                }
+                else{
+                    hostObjects.transport.jumpToNextCueMarker();
+                }
                 break;
             case PADS.UNDO:
                 if (globalState.isShiftPressed){
