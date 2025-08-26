@@ -1,0 +1,1772 @@
+{
+  "version": "2.18.1",
+  "name": "M-Vave SMK37-Pro",
+  "defaultGroup": {
+    "tags": [
+      "transport"
+    ]
+  },
+  "groups": [
+    {
+      "id": "kxN97bq7ImMz27d7Kdvn1",
+      "name": "Transport"
+    },
+    {
+      "id": "utnsQ-CWnLPuhiLZAf2oP",
+      "name": "General"
+    },
+    {
+      "id": "D5DyIc2BEst-qAveA8mms",
+      "name": "Air music tech"
+    },
+    {
+      "id": "n8xS02avymxC318VBlDYH",
+      "name": "Track"
+    }
+  ],
+  "mappings": [
+    {
+      "id": "hGsiLS2vPsE8ksImMi7w5",
+      "name": "play/pause",
+      "groupId": "kxN97bq7ImMz27d7Kdvn1",
+      "source": {
+        "type": 1,
+        "channel": 0,
+        "number": 94,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        }
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "press-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40073",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "sendFeedbackAfterControl": true,
+      "advanced": {
+        "on_activate": {
+          "send_midi_feedback": [
+            {
+              "raw": [
+                144,
+                95,
+                100
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "IAPHbSEYrLglYzfKqt7zS",
+      "name": "Rec",
+      "groupId": "kxN97bq7ImMz27d7Kdvn1",
+      "source": {
+        "type": 1,
+        "channel": 0,
+        "number": 95,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        }
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "press-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40046",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "controlIsEnabled": false,
+      "successAudioFeedback": {
+        "kind": "Simple"
+      }
+    },
+    {
+      "id": "jKvkk1SLnRq2Zssuv-yAe",
+      "name": "Undo",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 7
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40029",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "dcJyVmq5PrsXQ9hFAyCQG",
+      "name": "play",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button"
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40073",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "sendFeedbackAfterControl": true
+    },
+    {
+      "id": "tMz1WbDZqCXrBtHlzMjRI",
+      "name": "record",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 2
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 0,
+        "commandName": "1013",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "advanced": {
+        "on_activate": {
+          "send_midi_feedback": [
+            {
+              "raw": [
+                144,
+                95,
+                100
+              ]
+            }
+          ]
+        },
+        "on_deactivate": {
+          "send_midi_feedback": [
+            {
+              "raw": [
+                144,
+                95,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "successAudioFeedback": {
+        "kind": "Simple"
+      }
+    },
+    {
+      "id": "5jGXyBCQv1lUnIxKij5hr",
+      "name": "Shift",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 24
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "type": 63,
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "qIzGrI0SE0GhXnBnw04l9",
+      "name": "Redo",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 7
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40030",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "6fnLqimOwxziRUCKMwVOA",
+      "name": "Rewind",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 3
+      },
+      "mode": {
+        "type": 1,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1,
+        "turboRate": 100,
+        "buttonUsage": "press-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40084",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "QfbN1WT_yRPK_ef2tQ85E",
+      "name": "Fast forward",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 4
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1,
+        "minPressMillis": 50,
+        "maxPressMillis": 200,
+        "fireMode": "timeout"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40085",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "kDZriruffNyq1Mj59X2f7",
+      "name": "prev marker",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 5
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40172",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "QUbJMVFaKUYAnkOB4BTA4",
+      "name": "Set marker",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 5
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40157",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "-WE_2UV8S8yyjUoLreFCD",
+      "name": "next marker",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 6
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40173",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "kXhujPZhlym-Oq0mvZEfH",
+      "name": "delete marker",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementType": "Button",
+        "controlElementIndex": 6
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40613",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "0HrroUWDa-QeVZf002K5P",
+      "name": "Prev track",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "type": 3,
+        "channel": 3,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 25
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40286",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "0Dk9L5o-SsBY9umYLQiBO",
+      "name": "Prev track (selecting)",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "type": 3,
+        "channel": 3,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 25
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40288",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "Clq0Te0T1p97-dmwpc2Y1",
+      "name": "Next track",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 26
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40285",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "k0Za1mk0Hcp8GrE1Qhi7Z",
+      "name": "Next track (selecting)",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 26
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5,
+        "buttonUsage": "release-only"
+      },
+      "target": {
+        "type": 0,
+        "commandName": "40287",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "IfV-Q2Nt-wVjnlwT3MtYY",
+      "name": "18",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        }
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "name",
+        "fxName": " Fabric*AIR Music*2",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 1,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "7MW609zjAs2neg_zs8kaI",
+      "name": "19",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 1
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 2,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "CsDxcPhEQbwGd5mjFiDsD",
+      "name": "20",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 2
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 3,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "swOxAS6g-5VPKDdQlh2gL",
+      "name": "21",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 3
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 4,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "URxaO3Xer_qVGzOQpS-nX",
+      "name": "22",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 4
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 5,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "P-DiW4JVlkJ_NtiHFj91E",
+      "name": "23",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 5
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 6,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "QASyXm-eimoRzngdtrOGa",
+      "name": "24",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 6
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 57,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "syYrz28Mn62GeeuxX8XSU",
+      "name": "25",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 7
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 66,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "gYGx-2Zf0aV_Z9ZIdQwn_",
+      "name": "26",
+      "groupId": "D5DyIc2BEst-qAveA8mms",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 19
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "fxAnchor": "instance",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "paramIndex": 7,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "DxoEFNQwGwSeLrz_w6OKF",
+      "name": "27",
+      "groupId": "utnsQ-CWnLPuhiLZAf2oP",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 19
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "type": 2,
+        "trackGUID": "master",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      }
+    },
+    {
+      "id": "ZCKKMPtqwawQrwoisgpK_",
+      "name": "Arm",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "channel": 9,
+        "number": 64,
+        "character": 1,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 27
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1,
+        "buttonUsage": "press-only"
+      },
+      "target": {
+        "type": 5,
+        "trackGUID": "selected",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "zbxNsLfRITVAZDdNahe89",
+      "name": "Arm selected",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "channel": 9,
+        "number": 64,
+        "character": 1,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 27
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1,
+        "buttonUsage": "press-only"
+      },
+      "target": {
+        "type": 5,
+        "trackGUID": "selected*",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "OmaBZIBKDurOClA_m9nmd",
+      "name": "Mute",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "channel": 9,
+        "number": 65,
+        "character": 1,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 28
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 7,
+        "trackGUID": "selected",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "uRO9Ha439xFth6pcHddDn",
+      "name": "Mute selected",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "channel": 9,
+        "number": 65,
+        "character": 1,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 28
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 7,
+        "trackGUID": "selected*",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "CvOwDEUD4z0iuWSMKbKL-",
+      "name": "Track solo",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "channel": 9,
+        "number": 66,
+        "character": 1,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 29
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 8,
+        "trackGUID": "selected",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    },
+    {
+      "id": "UcvuWUVsKFOmQovEjpArA",
+      "name": "Solo selection",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "channel": 9,
+        "number": 66,
+        "character": 1,
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 29
+      },
+      "mode": {
+        "type": 2,
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 1
+      },
+      "target": {
+        "type": 8,
+        "trackGUID": "selected*",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "activationType": "modifiers",
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": true
+      }
+    },
+    {
+      "id": "Y6DhHC3qN6XqOuDnL5GYc",
+      "name": "Track volume",
+      "groupId": "n8xS02avymxC318VBlDYH",
+      "source": {
+        "category": "virtual",
+        "isRegistered": false,
+        "is14Bit": false,
+        "oscArgIndex": 0,
+        "buttonIndex": 0,
+        "buttonDesign": {
+          "background": {
+            "kind": "Color"
+          },
+          "foreground": {
+            "kind": "None"
+          },
+          "static_text": ""
+        },
+        "controlElementIndex": 16
+      },
+      "mode": {
+        "maxStepSize": 0.05,
+        "minStepFactor": 1,
+        "maxStepFactor": 5
+      },
+      "target": {
+        "type": 2,
+        "trackGUID": "selected",
+        "fxAnchor": "id",
+        "useSelectionGanging": false,
+        "useTrackGrouping": false,
+        "seekBehavior": "Immediate",
+        "useProject": true,
+        "moveView": true,
+        "seekPlay": true,
+        "oscArgIndex": 0,
+        "mouseAction": {
+          "kind": "MoveTo",
+          "axis": "X"
+        },
+        "takeMappingSnapshot": {
+          "kind": "LastLoaded"
+        }
+      },
+      "modifierCondition1": {
+        "paramIndex": 0,
+        "isOn": false
+      }
+    }
+  ]
+}

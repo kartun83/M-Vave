@@ -19,10 +19,13 @@ Currently tested only in Linux Mint.
 
 ## Debugging
 If you encounter any problems, feel free to submit issue
-To check extention logs, press "Ctrl+Enter" in BitWig and select "Show Control Script Console".
+Depending on used DAW paths may differ, but usually DAW provide some kind of output console. If applicable, refer to dedicated instructions for corresponding DAW
+
+* **BitWig** - To check extension logs, press "Ctrl+Enter" in BitWig and select "Show Control Script Console"
+* **FL Studio** - View->Script output (Ctrl+Alt+S)
 
 ## Configuration
-Refer to device specific instructions
+Refer to device specific instructions and DAW
 Device name matching isn't implemented yet, so it have to be configured manually.
 
 ---
