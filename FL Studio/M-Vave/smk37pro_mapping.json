@@ -1,0 +1,45 @@
+{
+  "PADS": {
+    "STATUS": 144,  
+    "CHANNEL": 10,
+    "REWIND": 91,
+    "FASTFORWARD": 92,
+    "PAUSE": 93,
+    "PLAY": 94,
+    "RECORD": 95,
+    "PREV_MARKER": 46,
+    "NEXT_MARKER": 47,
+    "UNDO": 76,
+    "ARM": {
+      "LOW": 64,
+      "HIGH": 70
+    }
+  },
+  "SHIFT": {
+    "CHANNEL": 10,
+    "KEY": 71
+  },
+  "FADERS": {
+    "STATUS": 176,
+    "CHANNEL": 1,
+    "SIZE": 4,
+    "BASE_CC": 64,
+    "BANKS": 2
+  },
+  "KNOBS": {
+    "CHANNEL": 6,
+    "SIZE": 8,
+    "BASE_CC": 48,
+    "BANKS": 2
+  },
+  "WHEELS": {
+    "PITCH": {
+      "CHANNEL": 3,
+      "KEY": 1
+    },
+    "MOD": {
+      "CHANNEL": 4
+    }
+  }
+}
+
