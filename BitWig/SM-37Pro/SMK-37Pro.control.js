@@ -114,7 +114,7 @@ function init() {
    noteInput = midiInPort.createNoteInput("Notes");
    noteInput.setShouldConsumeEvents(false);
 
-    let padsInput = midiInPort.createNoteInput("Pads");
+   let padsInput = midiInPort.createNoteInput("Pads");
    padsInput.setShouldConsumeEvents(false);
 
    // transport = host.createTransport();

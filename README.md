@@ -6,16 +6,17 @@ M-VAVE devices (like the SMK-37Pro) offer solid hardware with responsive keys, p
 
 ## Implemented features
 * [SM-37Pro](./SM-37Pro/implemented.md)
+* [SM-37 Elite](./SMK-37-Elite/SMK-37-Elite/implemented.md)
 * SMC-Pad - **Nothing, for now**
 
 ## Installation
 Copy all files for corresponding controller into subfolder in:
-* **MacOS** - ~/Documents/Bitwig\ Studio/Extensions/
+* **MacOS** - ~'/Documents/Bitwig Studio/Controller Scripts'
 * **Linux** - ~/Bitwig Studio/Extensions/
 * **Windows** - %userprofile%\Documents\Bitwig Studio\Extensions\
 
 ## Note
-Currently tested only in Linux Mint. 
+Currently tested only in Linux Mint and MacOS 
 
 ## Debugging
 If you encounter any problems, feel free to submit issue

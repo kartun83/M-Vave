@@ -10,7 +10,7 @@ add separate **SHIFT button** this pad is used as **SHIFT**
 
 * Knobs on bank 2 (9-16) have to be mapped on channel 6 (like those on bank 1) and type "**CC**"
 
-For your convinience you may use mapped_preset.smk37 from this repo.
+For your convenience you may use mapped_preset.smk37 from this repo.
 
 ## Pad BANK 2
 Pads are turned off when inactive, turns on when active
