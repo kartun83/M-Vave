@@ -1,0 +1,11 @@
+<!-- Hybrid: numerically derived, visually softened -->
+<path
+  d="
+    M80 240
+    C 160 235, 240 215, 320 190
+    C 400 165, 520 135, 640 120
+  "
+  fill="none"
+  stroke="#000"
+  stroke-width="2"
+  stroke-dasharray="6 4"/>
