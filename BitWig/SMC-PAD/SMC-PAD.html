@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>SMK37-Pro / Elite Controller Bindings Documentation</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.4;
+            margin: 40px;
+            color: #111;
+        }
+
+        h1, h2, h3 {
+            margin-top: 2em;
+        }
+
+        h2 {
+            page-break-before: always;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 6px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .context_dep {
+            background: #b8b8b8;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        .note {
+            background: #f8f8f8;
+            border-left: 4px solid #999;
+            padding: 10px;
+            margin: 1em 0;
+        }
+
+        .pad-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 18px;
+        }
+
+
+        @media print {
+            table {
+                break-inside: avoid;
+            }
+        }
+
+        .hardware-layout {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 80px;
+            align-items: stretch;   /* important */
+            max-width: 1500px;
+        }
+
+
+        /* LEFT SIDE: knobs + pads stacked */
+        .surface {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .control-8col {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            column-gap: 24px;
+        }
+
+
+
+        /* PAD GRID */
+        .pad-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 18px;
+        }
+
+        /* KNOB COLUMN */
+        .knob-column {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        /* FADER COLUMN */
+
+        /* small vertical control blocks */
+        .control-vertical {
+            background: white;
+            border: 1px solid #494949;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .control-vertical small {
+            display: block;
+            font-weight: 400;
+            color: #555;
+        }
+
+
+        /* the rectangle – rounded corners, subtle background, centered number */
+        .card {
+            aspect-ratio: 1.3 / 1;                   /* perfect square – rectangle feel */
+            background-color: white;
+            border-radius: 12px;                  /* slightly rounded – you can adjust */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;  /* stack lines vertically */
+            text-align: center;
+            line-height: 1.4;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #1e293b;
+            transition: all 0.1s ease;
+            border: 1px solid #494949;           /* very subtle border */
+        }
+
+        .knob-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            column-gap: 24px;
+            justify-items: center;
+        }
+
+
+        .knob-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .knob {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #444;
+            position: relative;
+            background: radial-gradient(circle at 30% 30%, #fafafa, #dcdcdc);
+        }
+
+        .knob::after {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 18px;
+            background: #111;
+            border-radius: 2px;
+        }
+
+        .fader {
+            width: 30px;
+            height: 200px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            position: relative;
+            background: linear-gradient(to bottom, #f4f4f4, #e0e0e0);
+        }
+
+
+
+        .fader-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fader-section {
+            flex: 1;                     /* fills full height */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;         /* vertically centered */
+            justify-items: center;
+        }
+
+
+        .fader-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .fader-label {
+            font-size: 0.9rem;
+        }
+
+        /* fader cap */
+        .fader::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 60%;
+            width: 55px;
+            height: 14px;
+            background: #444;
+            border-radius: 6px;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #333;
+        }
+
+
+        /* optional: very light hover effect – not necessary but nice */
+        .card:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.02);
+        }
+
+        /* make sure two rows are clear on very small screens */
+        @media (max-width: 650px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr); /* 4x4 on narrow screens, still two rows? no – adapts but keeps 16 items */
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr); /* 2x? – anyway, fine */
+            }
+        }
+
+        @media print {
+            .card:hover {
+                background: white;
+                box-shadow: none;
+            }
+            .control-group {
+                border-color: #bbb;
+            }
+        }
+
+        .control-group {
+            padding: 24px;
+            border: 1px dashed #d2d8e1;
+            border-radius: 16px;
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+<h1>SMC-PAD Controller Bindings Documentation</h1>
+
+<p>To be able to use this script you have to import supplied device preset using MidiSuite.</p>
+<p>Documentation needs update !!!</p>
+
+<p>
+
+    This document describes control bindings for the script operating in following modes:
+    <ul>
+        <li><b>Production</b></li>
+        <li><b>Perform</b></li>
+        <li><b>Device manipulation</b></li>
+    </ul>
+</p>
+
+<hr />
+
+<h2>Overview</h2>
+
+<p>
+    The script operates using modes, banks, and a shift modifier.
+</p>
+
+<ul>
+    <li><b>Modes</b> redefine the behavior of all controls.</li>
+    <li><b>Banks</b> allow reuse of knobs and faders.</li>
+    <li><b>Shift</b> enables secondary functions.</li>
+</ul>
+
+<div class="note">
+    <b>Shift Modifier:</b> Pad 24 (Note 71) acts as a global Shift button.
+    Shifted behavior is documented explicitly in all tables.
+</div>
+
+<h2>Hardware Map</h2>
+
+
+
+<h3>Hardware Layout</h3>
+
+<div class="hardware-layout">
+
+    <!-- LEFT SIDE -->
+    <div class="surface">
+
+        <div class="control-group">
+            <div class="section-title">ENCODERS</div>
+            <div class="knob-grid">
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>1 / 9</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>2 / 10</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>3 / 11</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>4 / 12</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>5 / 13</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>6 / 14</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>7 / 15</div>
+                </div>
+
+                <div class="knob-wrapper">
+                    <div class="knob"></div>
+                    <div>8 / 16</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="section-title">PADS</div>
+            <div class="pad-grid">
+                <div class="card">17</div>
+                <div class="card">18</div>
+                <div class="card">19</div>
+                <div class="card">20</div>
+                <div class="card">21</div>
+                <div class="card">22</div>
+                <div class="card">23</div>
+                <div class="card">24<br><b>SHIFT</b></div>
+
+                <div class="card">25</div>
+                <div class="card">26</div>
+                <div class="card">27</div>
+                <div class="card">28</div>
+                <div class="card">29</div>
+                <div class="card">30</div>
+                <div class="card">31</div>
+                <div class="card">32</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="fader-container control-group" >
+
+        <div class="section-title">FADERS</div>
+
+        <div class="fader-section">
+
+            <div class="fader-wrapper">
+                <div class="fader"></div>
+                <div>1 / 5</div>
+            </div>
+
+            <div class="fader-wrapper">
+                <div class="fader"></div>
+                <div>2 / 6</div>
+            </div>
+
+            <div class="fader-wrapper">
+                <div class="fader"></div>
+                <div>3 / 7</div>
+            </div>
+
+            <div class="fader-wrapper">
+                <div class="fader"></div>
+                <div>4 / 8</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+---
+
+<h2>Mode: Production</h2>
+
+<p>
+    Primary purpose: recording, arming, and track-level control.
+</p>
+
+<h3>Pads</h3>
+
+<table>
+    <tr>
+        <th>Pad</th>
+        <th>Note</th>
+        <th>Normal</th>
+        <th>Color</th>
+        <th>Shift + Pad</th>
+        <th>Color</th>
+    </tr>
+    <tr><td>17</td><td>64</td><td>Toggle Arm<sup>2</sup></td><td>&nbsp;</td>
+        <td>Cycle through<sup>2</sup>: <ul><li>Unmodified</li><li>Solo</li><li>Mute</li></ul></td><td>&nbsp;</td></tr>
+    <tr><td>18</td><td>65</td><td>Preroll duration - cycle through <sup>3</sup>: <ul>
+        <li>none</li>
+        <li>one bar</li>
+        <li>two bars</li>
+        <li>four bars</li>
+    </ul></td><td>&nbsp;</td><td>Toggle metronome</td><td>&nbsp;</td></tr>
+    <tr><td>19</td><td>66</td><td>Toggle arranger automation write</td><td>&nbsp;</td><td>Cycle arranger automation<sup>3</sup>:
+        <ul><li>latch</li> <li>touch</li> <li>write</li></ul></td><td>&nbsp;</td></tr>
+    <tr><td>20</td><td>67</td><td>Toggle record quantization</td><td>&nbsp;</td><td>Cycle quantization grid setting through<sup>3</sup>:
+    <ul><li>OFF</li><li>1/32</li><li>1/16</li><li>1/8</li><li>1/4</li></ul></td><td>&nbsp;</td></tr>
+    <tr><td>21</td><td>68</td><td>When tapping this pad multiple times, the timing of those calls gets evaluated and causes adjustments to the project tempo.</td><td>&nbsp;</td><td>—</td><td>&nbsp;</td></tr>
+    <tr><td>22</td><td>69</td><td>Open browser for inserting after this track</td><td>&nbsp;</td><td>Open device browser for inserting after this device</td><td>&nbsp;</td></tr>
+    <tr class="context_dep"><td>22</td><td>69</td><td>When browser is opened - confirm selection</td><td>&nbsp;</td><td>When browser is opened - cancel selection</td><td>&nbsp;</td></tr>
+    <tr><td>23</td><td>70</td><td>Enable/disable selected device</td><td>&nbsp;</td><td>Show/hide device window popup (if it has one)</td><td>&nbsp;</td></tr>
+    <tr>
+        <td><b>24</b></td>
+        <td>71</td>
+        <td><b>Shift (hold)</b></td><td>&nbsp;</td>
+        <td>—</td><td>&nbsp;</td>
+    </tr>
+    <tr><td>25</td><td>94</td><td>Play</td><td>&nbsp;</td><td>Activate/deactivate selected track</td><td>&nbsp;</td></tr>
+    <tr class="context_dep"><td>25</td><td>94</td><td>-</td><td>&nbsp;</td><td>When browser is opened - toggle live preview</td><td>&nbsp;</td></tr>
+    <tr><td>26</td><td>93</td><td>Pause</td><td>&nbsp;</td><td>Toggle loop</td><td>&nbsp;</td></tr>
+    <tr><td>27</td><td>95</td><td>Record</td><td>&nbsp;</td><td>Toggle overdub</td><td>&nbsp;</td></tr>
+    <tr><td>28</td><td>91</td><td>Rewind</td><td>&nbsp;</td><td>Go back by given amount of BEATS <sup>1</sup></td><td>&nbsp;</td></tr>
+    <tr><td>29</td><td>92</td><td>Fast-forward</td><td>&nbsp;</td><td>Go forward by given amount of BEATS<sup>1</sup></td><td>&nbsp;</td></tr>
+    <tr><td>30</td><td>46</td><td>Prev marker</td><td>&nbsp;</td><td>—</td><td>&nbsp;</td></tr>
+    <tr><td>31</td><td>47</td><td>Next marker</td><td>&nbsp;</td><td>Add cue marker at playback position. This would enable displaying of CUE markers.</td><td>&nbsp;</td></tr>
+    <tr><td>32</td><td>76</td><td>Undo</td><td>Lit when can do UNDO. Turned off if can not.</td><td>Redo</td><td>Lit when can do REDO. Turned off if can not.</td></tr>
+</table>
+
+<sup>1</sup> - Beats are defined in controller settings. By default, it's 4.0<br/>
+<sup>2</sup> - Changes applied to selected track<br/>
+<sup>3</sup> - Possible values are determined on startup and depends on actual Bitwig version. Defined list is valid at the time of documentation writing
+
+<h3>Knobs – Bank A (1–8)</h3>
+
+<table>
+    <tr>
+        <th>Knob</th>
+        <th>Normal</th>
+        <th>Shift + Knob</th>
+    </tr>
+    <tr><td>1-6</td><td>Adjust remote control parameter</td><td>Finetune remote control parameter<sup>1</sup></td></tr>
+
+<!--    <tr><td>2</td><td>—</td><td>—</td></tr>-->
+<!--    <tr><td>3</td><td>—</td><td>—</td></tr>-->
+<!--    <tr><td>4</td><td>—</td><td>—</td></tr>-->
+<!--    <tr><td>5</td><td>—</td><td>—</td></tr>-->
+<!--    <tr><td>6</td><td>—</td><td>—</td></tr>-->
+    <tr><td>7<sup>2</sup></sup2></td><td>Select track in tracklist</td><td>—</td></tr>
+    <tr><td>8</td><td>Switch remote control page</td><td>Select device in chain</td></tr>
+</table>
+
+<sup>1</sup> - Scaling factor for fine-tuning could be adjusted in controller preferences<br/>
+<sup>2</sup> - Binding is exactly the same as Knob9, just to avoid exessive bank switching<br/>
+For more information on Remote controls refer to <a href="https://www.bitwig.com/userguide/latest/midi_controllers/#the_remote_controls_pane">official documentation</a>
+
+<h3>Knobs – Bank B (9–16)</h3>
+
+<table>
+    <tr>
+        <th>Knob</th>
+        <th>Note</th>
+        <th>Normal</th>
+        <th>Shift + Knob</th>
+    </tr>
+    <tr><td>9</td><td>56</td><td>Select track in tracklist</td><td>—</td></tr>
+    <tr><td>10</td>><td>57</td><td>Adjust loop duration</td><td>Move loop</td></tr>
+    <tr><td>11</td>><td>58</td><td>—</td><td>—</td></tr>
+    <tr><td>12</td>><td>59</td><td>—</td><td>—</td></tr>
+    <tr><td>13</td>><td>60</td><td>—</td><td>—</td></tr>
+    <tr><td>14</td>><td>61</td><td>—</td><td>—</td></tr>
+    <tr><td>15</td>><td>62</td><td>—</td><td>—</td></tr>
+<!--    <tr><td>15</td>><td>62</td><td>Keyboard style navigation left/right</td><td>Keyboard style navigation up/down</td></tr>-->
+
+    <tr><td>16</td>><td>63</td><td>Zoom in/Out<sup>2</sup></td><td>Each tick alternates between two states<sup>2</sup>:
+        <ul><li>Left - Toggles between zoomToSelection and the last set zoom level</li>
+            <li>Right - Toggles between zoomToSelection and zoomToFit</li></ul></td></tr>
+</table>
+<sup>2</sup> - Works in currently selected window (pane) if it's supports zooming.
+
+<h3>Knobs – Bank B (9–16) - Device browsing</h3>
+If popup browser is active,
+<table>
+    <tr>
+        <th>Knob</th>
+        <th>Note</th>
+        <th>Normal</th>
+        <th>Shift + Knob</th>
+    </tr>
+    <tr><td>9</td><td>56</td><td>Select item in browser</td><td>—</td></tr>
+    <tr><td>10</td>><td>57</td><td>Select category in browser</td><td>—</td></tr>
+    <tr><td>11</td>><td>58</td><td>Select device in browser</td><td>—</td></tr>
+    <tr><td>12</td>><td>59</td><td>Select smart collection in browser/td><td>—</td></tr>
+    <tr><td>13</td>><td>60</td><td>Select tag in browser</td><td>—</td></tr>
+    <tr><td>14</td>><td>61</td><td>Select creator in browser</td><td>—</td></tr>
+    <tr><td>15</td>><td>62</td><td>—</td><td>—</td></tr>
+
+    <tr><td>16</td>><td>63</td><td>Zoom in/Out<sup>2</sup></td><td>Each tick alternates between two states<sup>2</sup>:
+        <ul><li>Left - Toggles between zoomToSelection and the last set zoom level</li>
+            <li>Right - Toggles between zoomToSelection and zoomToFit</li></ul></td></tr>
+</table>
+
+<h3>Faders</h3>
+
+<table>
+    <tr>
+        <th>Fader</th>
+        <th>Bank</th>
+        <th>Normal</th>
+        <th>Shift + Fader</th>
+    </tr>
+    <tr><td>1</td><td>1</td><td>—</td><td>—</td></tr>
+    <tr><td>2</td><td>1</td><td>—</td><td>—</td></tr>
+    <tr><td>3</td><td>1</td><td>—</td><td>—</td></tr>
+    <tr><td>4</td><td>1</td><td>—</td><td>—</td></tr>
+    <tr><td>5</td><td>2</td><td>Adjust volume of selected track<sup>1</sup></td><td>Adjust volume of MASTER track</td></tr>
+    <tr><td>6</td><td>2</td><td>Adjust pan of selected track<sup>1</sup></td><td>—</td></tr>
+    <tr><td>7</td><td>2</td><td>Adjust Send 1 of selected track<sup>1</sup></td><td>Adjust Send 3 of selected track<sup>1</sup></td></tr>
+    <tr><td>8</td><td>2</td><td>Adjust Send 2 of selected track<sup>1</sup></td><td>Adjust Send 4 of selected track<sup>1</sup></td></tr>
+
+</table>
+
+<sup>1</sup> - Works in pick-up mode. I.e. until value in fader matches value in control, no changes are applied </br>
+
+<hr />
+
+<h2>Mode: Perform - <b>PLANNED!!!</b></h2>
+
+<p>
+    Primary purpose: clip launching, scene triggering, and live performance control.
+</p>
+
+<h3>Pads</h3>
+
+<table>
+    <tr>
+        <th>Pad</th>
+        <th>Note</th>
+        <th>Normal</th>
+        <th>Shift + Pad</th>
+    </tr>
+
+    <tr><td>17–24</td><td>64–71</td>
+        <td>Launch clip on corresponding track (current scene)</td>
+        <td>Stop clip on corresponding track</td>
+    </tr>
+
+    <tr><td>25</td><td>94</td>
+        <td>Launch selected scene</td>
+        <td>Duplicate selected scene</td>
+    </tr>
+
+    <tr><td>26</td><td>93</td>
+        <td>Stop all clips</td>
+        <td>Toggle clip launcher panel</td>
+    </tr>
+
+    <tr><td>27</td><td>95</td>
+        <td>Toggle clip quantization</td>
+        <td>Cycle clip quantization grid</td>
+    </tr>
+
+    <tr><td>28</td><td>91</td>
+        <td>Previous scene</td>
+        <td>Jump 4 scenes up</td>
+    </tr>
+
+    <tr><td>29</td><td>92</td>
+        <td>Next scene</td>
+        <td>Jump 4 scenes down</td>
+    </tr>
+
+    <tr><td>30</td><td>46</td>
+        <td>Mute selected track</td>
+        <td>Solo selected track</td>
+    </tr>
+
+    <tr><td>31</td><td>47</td>
+        <td>Toggle selected device on/off</td>
+        <td>Open device window</td>
+    </tr>
+
+    <tr>
+        <td><b>32</b></td>
+        <td>76</td>
+        <td><b>Shift (hold)</b></td>
+        <td>—</td>
+    </tr>
+</table>
+
+<h3>Knobs – Bank A (1–8)</h3>
+
+<table>
+    <tr>
+        <th>Knob</th>
+        <th>Normal</th>
+        <th>Shift + Knob</th>
+    </tr>
+
+    <tr><td>1–6</td>
+        <td>Track macro / Remote control parameter</td>
+        <td>Fine-tune macro</td>
+    </tr>
+
+    <tr><td>7</td>
+        <td>Master filter (HP/LP depending on mapping)</td>
+        <td>Reset filter</td>
+    </tr>
+
+    <tr><td>8</td>
+        <td>Switch macro page</td>
+        <td>Select device in chain</td>
+    </tr>
+</table>
+
+<h3>Faders</h3>
+
+<table>
+    <tr>
+        <th>Fader</th>
+        <th>Bank</th>
+        <th>Normal</th>
+        <th>Shift + Fader</th>
+    </tr>
+
+    <tr><td>1–8</td><td>Track Bank</td>
+        <td>Track volume (1–8)</td>
+        <td>Track Send 1 (1–8)</td>
+    </tr>
+</table>
+
+
+---
+
+<h2>Appendix</h2>
+
+<h3>Shift Summary</h3>
+
+<table>
+    <tr>
+        <th>Control Type</th>
+        <th>Shift Behavior</th>
+    </tr>
+    <tr><td>Pads</td><td>Secondary pad function</td></tr>
+    <tr><td>Knobs</td><td>Alternate parameter layer</td></tr>
+    <tr><td>Faders</td><td>Secondary mix / control layer</td></tr>
+    <tr><td>Pad 24</td><td>Shift modifier (hold)</td></tr>
+</table>
+
+<h3>Notes</h3>
+<ul>
+    <li>Bindings subject to change.</li>
+    <li>Document version should match script version.</li>
+</ul>
+
+</body>
+</html>
