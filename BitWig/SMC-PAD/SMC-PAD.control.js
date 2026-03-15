@@ -52,7 +52,8 @@ switch (platformString) {
    case "MAC":
       printDebugInfo(`"${platformString}" platform detected`);
       host.addDeviceNameBasedDiscoveryPair(["SINCO SMC-PAD-Master", "SINCO SMC-PAD-Private", "Port 3"],
-                                           ["SMC-PAD Bluetooth"]);
+                                           ["SINCO SMC-PAD-Master", "SINCO SMC-PAD-Private", "Port 3"]);
+      host.addDeviceNameBasedDiscoveryPair(["SMC-PAD Bluetooth","",""],["SMC-PAD Bluetooth","",""]);
       break;
    case "LINUX":
       printDebugInfo(`"${platformString}" platform detected`);
@@ -185,7 +186,7 @@ function init() {
 
    bitwig_domains = initDomains(hostObjects);
 
-   printDebugInfo("SMK37-Elite initialized!");
+   printDebugInfo(`${PLUGIN_SETTINGS.VENDOR} ${PLUGIN_SETTINGS.BOARD} initialized!`);
 }
 
 // Called when a short MIDI message is received on MIDI input port 0.
