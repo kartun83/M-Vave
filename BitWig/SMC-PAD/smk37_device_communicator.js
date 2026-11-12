@@ -2,7 +2,9 @@ load("text_to_byte.js");
 load("smk37_colors.js");
 
 class DeviceCommunicator {
-    static MASTER_PORT_NAME = PLUGIN_SETTINGS.BOARD_SETTINGS.INS.master.name;
+
+    // static MASTER_PORT_NAME = PLUGIN_SETTINGS.BOARD_SETTINGS.INS.ports.master.name;
+    static MASTER_PORT_NAME = "";
     static SCREEN_ADDRESS = 0x40;
     static KNOB_NAME_BASE = 0x20;
     static KNOB_VOLUME_BASE = 0x30;
@@ -11,10 +13,20 @@ class DeviceCommunicator {
     static FADER_VALUE_BASE = 0x49;
 
     constructor(context) {
+        // const INS_BY_NAME = Object.fromEntries(
+        //     (PLUGIN_SETTINGS.BOARD_SETTINGS.INS.ports || [])
+        //         .map(p => [p.name, p])
+        // );
+        //
+        // if (!INS_BY_NAME.master) {
+        //     throw new Error("MASTER port not defined in config");
+        // }
+
+        this.MASTER_PORT_NAME = PLUGIN_SETTINGS.BOARD_SETTINGS.INS_BY_NAME.master.name;
         this.context = context;
         this.midiOutMain = context.getOut(this.MASTER_PORT_NAME);
         if (!this.midiOutMain) {
-          printDebugInfo(`Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`, true);
+            printDebugInfo(`[Device communicator] Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`, true);
         }
         this.connected = true;
         this.padLightStates = {};
@@ -22,14 +34,14 @@ class DeviceCommunicator {
 
     _sendMidi(status, data1, data2) {
         if (!this.connected) return;
-        if (!this.midiOutMain) { displayErrorPopup(`Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`)} else {
+        if (!this.midiOutMain) { displayErrorPopup(`Port ${this.MASTER_PORT_NAME} of ${this.context.boardName} of  is not available`)} else {
             this.midiOutMain.sendMidi(status, data1, data2);
         }
     }
 
     _sendSysex(data) {
         if (!this.connected) return;
-        if (!this.midiOutMain) { displayErrorPopup(`Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`)} else {
+        if (!this.midiOutMain) { displayErrorPopup(`[Device communicator->_sendSysex] Port ${this.MASTER_PORT_NAME} of ${this.context.boardName} of  is not available`)} else {
             this.midiOutMain.sendSysex(
                 toHex(data)
             );
@@ -37,7 +49,7 @@ class DeviceCommunicator {
     }
 
     // _sendSysexToPrivate(data) {
-    //     // Possible command for board preset preset setup
+    //     // Possible command for board preset setup
     //     // host.getMidiOutPort(1).sendSysex([0xF0, 0x00, 0x32, 0x01, 0x08, 0x00, 0x00, 0x00, 0x00, 0x7F, 0x01, 0xF7]);
     //     // host.getMidiOutPort(1).sendSysex([0xF0, 0x00, 0x32, 0x0d, 0x61, 0x06, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x40, 0x0C, 0x00, 0x00, 0x06, 0x02, 0x04, 0x08, 0xF7]);
     //     if (!this.connected) return;
@@ -73,7 +85,7 @@ class DeviceCommunicator {
     }
 
     switchBank(bank) {
-        if (!this.midiOutMain) { displayErrorPopup(`Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`)} else {
+        if (!this.midiOutMain) { displayErrorPopup(`[-->switchBank] Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`)} else {
             this._sendSysex([0xF0, 0x35, 0x36, 0x00, bank, 0xF7]);
             this._sendSysex([0xF0, 0x35, 0x36, 0x01, bank, 0xF7]);
         }
@@ -88,8 +100,8 @@ class DeviceCommunicator {
             0xF7
         ];
         //if (!this.midiOutMain) { displayErrorPopup(`Port ${this.MASTER_PORT_NAME} of ${context.boardName} of  is not available`)} else {
-            //this.midiOutMain.sendSysex(toHex(sysex));
-            this._sendSysex(sysex);
+        //this.midiOutMain.sendSysex(toHex(sysex));
+        this._sendSysex(sysex);
         //}
     }
 
@@ -146,7 +158,7 @@ class DeviceCommunicator {
             [0xF0, 0x35, 0x37, targetId, payload.length]
                 .concat(payload)
                 .concat([0xF7]
-        );
+                );
 
         this._sendSysex(msg);
     };

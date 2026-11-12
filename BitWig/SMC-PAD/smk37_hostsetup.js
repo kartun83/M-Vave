@@ -83,6 +83,23 @@ function _check_config(CONFIG){
     if (CONFIG.numSendPages < 4) CONFIG.numSendPages = 4;
 }
 
+function _adjust_config(CONFIG){
+    const INS_BY_NAME = Object.fromEntries(
+        (PLUGIN_SETTINGS.BOARD_SETTINGS.INS.ports || [])
+            .map(p => [p.name, p])
+    );
+    const OUTS_BY_NAME = Object.fromEntries(
+        (PLUGIN_SETTINGS.BOARD_SETTINGS.OUTS.ports || [])
+            .map(p => [p.name, p])
+    );
+
+    if (!INS_BY_NAME.master) {
+        throw new Error("MASTER port not defined in config");
+    }
+    CONFIG.INS_BY_NAME = INS_BY_NAME;
+    CONFIG.OUTS_BY_NAME = OUTS_BY_NAME;
+}
+
 // midi.js
 function setupMidiPorts(host, onKeys, onOtherControls) {
     const midiInKeys = host.getMidiInPort(0);

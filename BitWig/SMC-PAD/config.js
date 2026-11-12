@@ -7,42 +7,43 @@ const PLUGIN_SETTINGS = {
     SUPPORT: 'https://github.com/kartun83/M-Vave',
     BOARD_SETTINGS: {
         NAME: "SMC-PAD",
-        SCREEN_ADDRESS: 0x40,
-        //MIDI_INS_COUNT: 3,
-        //MIDI_OUTS_COUNT: 3,
         INS: {
-            midi_ports_count: 3,
-            master: {
-                index: 0,
-                enabled: true,
-                name: "master"
-            },
-            private: {
-                index: 1,
-                enabled: false,   // 👈 disable noisy port
-                name: "private"
-            },
-            port3: {
-                index: 2,
-                enabled: false,
-                name: "unknown"
-            }
+            midi_ports_count: 1,
+            ports: [
+                {
+                    index: 0,
+                    enabled: true,
+                    name: "master"
+                },
+                {
+                    index: 1,
+                    enabled: false,   // 👈 disable noisy port
+                    name: "private"
+                },
+                {
+                    index: 2,
+                    enabled: false,
+                    name: "port3"
+                }
+            ]
         },
 
         OUTS: {
-            midi_ports_count: 3,
-            master: {
-                index: 0,
-                enabled: true
-            },
-            private: {
-                index: 1,
-                enabled: true
-            },
-            port3: {
-                index: 2,
-                enabled: true
-            }
+            midi_ports_count: 1,
+            ports: [
+                {  name: "master",
+                    index: 0,
+                    enabled: true
+                },
+                {   name: "private",
+                    index: 1,
+                    enabled: false
+                },
+                {   name: "port3",
+                    index: 2,
+                    enabled: false
+                }
+            ]
         },
         KNOBS: 8,
         FADERS: 0

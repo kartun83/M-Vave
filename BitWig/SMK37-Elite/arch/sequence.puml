@@ -1,0 +1,9 @@
+@startuml
+BitWig -> PortRouter : onMidi(PLUGIN_SETTINGS.BOARD_SETTINGS.INS.master.index, s,d1,d2))
+PortRouter --> InputRouter : onMidi(port, status, data1, data2)
+PortRouter --> InputRouterPrivate : onMidi(port, status, data1, data2)
+InputRouter -> ChannelRouter : route_midi(type, channel, data1, data2)
+ChannelRouter --> InputHandlerPads : onMidi(type, d1, d2)
+ChannelRouter --> InputHandlerFaders : onMidi(type, d1, d2)
+ChannelRouter --> InputHandlerKnobs : onMidi(type, d1, d2)
+@enduml

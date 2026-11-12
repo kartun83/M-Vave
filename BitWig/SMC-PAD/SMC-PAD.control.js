@@ -51,15 +51,15 @@ switch (platformString) {
       break;
    case "MAC":
       printDebugInfo(`"${platformString}" platform detected`);
-      host.addDeviceNameBasedDiscoveryPair(["SINCO SMC-PAD-Master", "SINCO SMC-PAD-Private", "Port 3"],
-                                           ["SINCO SMC-PAD-Master", "SINCO SMC-PAD-Private", "Port 3"]);
-      host.addDeviceNameBasedDiscoveryPair(["SMC-PAD Bluetooth","",""],["SMC-PAD Bluetooth","",""]);
+      host.addDeviceNameBasedDiscoveryPair(["SINCO SMC-PAD-Master"],
+                                           ["SINCO SMC-PAD-Master"]);
+      host.addDeviceNameBasedDiscoveryPair(["SMC-PAD Bluetooth"],["SMC-PAD Bluetooth"]);
       break;
    case "LINUX":
       printDebugInfo(`"${platformString}" platform detected`);
       break;
    default:
-      println(`!!Unknown platform detected: "${platformString}"`);
+      printDebugInfo(`!!Unknown platform detected: "${platformString}"`);
       break;
 }
 
@@ -84,6 +84,7 @@ let padRenderer;
 function init() {
    printDebugInfo(`starting init`);
    _check_config(CONFIG);
+   _adjust_config(PLUGIN_SETTINGS.BOARD_SETTINGS);
    // const transport = host.createTransport();
 
 // States
@@ -125,8 +126,9 @@ function init() {
    const portRouter = new PortRouter(context, PLUGIN_SETTINGS.BOARD_SETTINGS);
 
    // host.getMidiInPort(0).setMidiCallback((s,d1,d2) => inputRouter.onMidi(0, s,d1,d2));
-   const master_short = PLUGIN_SETTINGS.BOARD_SETTINGS.INS.master;
+   const master_short = PLUGIN_SETTINGS.BOARD_SETTINGS.INS_BY_NAME.master;
    if (context.isEnabled(master_short.name)) {
+      printDebugInfo(`Initalizing procesing for ${master_short.name}`);
       context.getIn(master_short.name).setMidiCallback((s,d1,d2) => portRouter.onMidi(master_short.index, s,d1,d2));
       context.getIn(master_short.name).setSysexCallback(data => portRouter.onSysex(master_short.index, data));
       setupShiftButton(hostObjects.surface, context.getIn(master_short.name), controllerState);
@@ -136,12 +138,13 @@ function init() {
       printDebugInfo(`No callbacks set for ${master_short.name} as it's disabled in configuration`);
    }
 
-   const private_short = PLUGIN_SETTINGS.BOARD_SETTINGS.INS.private;
+   const private_short = PLUGIN_SETTINGS.BOARD_SETTINGS.INS_BY_NAME.private;
    if (context.isEnabled(private_short.name)) {
+      printDebugInfo(`Initalizing procesing for ${private_short.name}`);
       // context.getIn(private_short.name)?.setMidiCallback((s, d1, d2) => portRouter.onMidi(private_short.index, s, d1, d2));
       // context.getIn(private_short.name)?.setSysexCallback(data => portRouter.onSysex(private_short.index, data));
       // context.getOut(private_short.name).sendSysex([0xF0, 0x35, 0x36, 0x00, bank, 0xF7]);
-      printDebugInfo("Trying to change preset to 5");
+      //printDebugInfo("Trying to change preset to 5");
       //host.getMidiOutPort(1).sendSysex([0xF0, 0x84, 0x00, 0x00, 0x40, 0x0C, 0x00, 0x00, 0x04, 0x02, 0x04, 0x08, 0xF7]);
       // host.getMidiOutPort(1).sendSysex(
       //     "F0 00 32 09 49 00 00 00 02 00 00 00 00 10 00 00 00 04 6A 03 F7"
@@ -230,5 +233,5 @@ function flush() {
 
 function exit() {
    blinkManager.stopAll();
-   println("SMK37-Elite disconnected!");
+   println(`${PLUGIN_SETTINGS.BOARD} disconnected!`);
 }

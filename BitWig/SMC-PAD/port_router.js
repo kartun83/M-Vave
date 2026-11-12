@@ -4,7 +4,7 @@ class PortRouter {
         this.inputs = {};
         this.name = "[PortRouter]";
 
-        const ins = boardSettings.INS;
+        const ins = boardSettings.INS.ports;
 
         Object.keys(ins).forEach(name => {
             const cfg = ins[name];

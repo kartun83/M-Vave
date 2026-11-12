@@ -1,0 +1,69 @@
+'idea.disableSyntaxCheck
+
+@startuml
+set separator ::
+!pragma layout smetana
+
+package "config.js" {
+    struct "CONFIG"
+    struct "PLUGIN_SETTINGS"
+}
+
+class "DeviceCommunicator" {
+Communication with the hardware (sending data)
+--
++ setPadLight
++ turnOffLight
++ switchBank
++ sendPadString
++ sendStringMessage
+}
+
+class "DeviceContext" {
+Abstraction for DeviceCommunicator, minimize coupling with real hardware
+--
++ get_out
+<i>Get actual out port by name
++ get_in
+<i>Get actual in port by name
+}
+
+class "PortRouter" {
+Manage inputs from different HARDWARE MIDI ports
+--
+}
+
+class "InputRouter" {
+}
+
+class "InputRouterPrivate" {
+}
+
+class "ChannelRouter" {
+Manage inputs from different CHANNELS on single MIDI port
+}
+'package "InputHanlders" {
+    class InputHandlerPads {
+        Dedicated PADS handler
+        --
+    }
+
+    class InputHandlerFaders{
+        Dedicated Faders handler
+        --
+    }
+
+    class InputHandlerKnobs{
+        Dedicated Knobs handler
+        --
+    }
+'}
+
+package "smk37_hostsetup.js" {
+
+}
+
+package "smk37_controls"{
+
+}
+@enduml

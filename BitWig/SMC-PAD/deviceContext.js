@@ -7,33 +7,39 @@ class DeviceContext {
         this.boardName = boardSettings.NAME;
 
         // --- MIDI OUTS ---
-        for (const name in boardSettings.OUTS) {
-            const cfg = boardSettings.OUTS[name];
+        for (const cfg of boardSettings.OUTS.ports) {
             if (!cfg.enabled) {
-                printDebugInfo(`OUT '${name}' disabled`);
-                continue;
+                printDebugInfo(`OUT '${cfg.name}' disabled`);
+                continue;}
+
+            else {
+                printDebugInfo(`OUT '${cfg.name}' enabled`);
             }
 
             const index = cfg.index;
-            this.midiOuts[name] = host.getMidiOutPort(index);
-            printDebugInfo(`Added OUT port '${name}' → index ${index}`);
+            printDebugInfo(`Trying to get ${index} OUT port of the HOST`);
+            this.midiOuts[cfg.name] = host.getMidiOutPort(index);
+            printDebugInfo(`Added OUT port '${cfg.name}' → index ${index}`);
         }
 
         // --- MIDI INS ---
-        for (const name in boardSettings.INS) {
-            const cfg = boardSettings.INS[name];
+        for (const cfg of boardSettings.INS.ports) {
             if (!cfg.enabled) {
-                printDebugInfo(`IN '${name}' disabled`);
-                continue;
+                printDebugInfo(`IN '${cfg.name}' disabled`);
+                continue;}
+
+            else {
+                printDebugInfo(`IN '${cfg.name}' enabled`);
             }
 
             const index = cfg.index;
-            this.midiIns[name] = host.getMidiInPort(index);
-            printDebugInfo(`Added IN port '${name}' → index ${index}`);
-            const noteInputKeys = this.midiIns[name].createNoteInput("Notes");
+            this.midiIns[cfg.name] = host.getMidiInPort(index);
+            printDebugInfo(`Added IN port '${cfg.name}' → index ${index}`);
+
+            const noteInputKeys = this.midiIns[cfg.name].createNoteInput("Notes");
             noteInputKeys.setShouldConsumeEvents(false);
 
-            const noteInputPads = this.midiIns[name].createNoteInput("Pads");
+            const noteInputPads = this.midiIns[cfg.name].createNoteInput("Pads");
             noteInputPads.setShouldConsumeEvents(false);
         }
 
@@ -48,7 +54,7 @@ class DeviceContext {
     getIn(name = "master") {
         const port = this.midiIns[name];
         if (!port) {
-            printDebugInfo(`[WARN] MIDI IN Port'${name}' not available`);
+            printDebugInfo(`[WARN] [DeviceContext->getIn] MIDI IN Port'${name}' not available`);
         }
         return port;
     }
@@ -56,7 +62,7 @@ class DeviceContext {
     getOut(name = "master") {
         const port = this.midiOuts[name];
         if (!port) {
-            printDebugInfo(`[WARN] MIDI OUT Port '${name}' not available`);
+            printDebugInfo(`[WARN] [DeviceContext->getOut] MIDI OUT Port '${name}' not available`);
         }
         return port;
     }
